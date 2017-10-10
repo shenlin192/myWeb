@@ -1,0 +1,5 @@
+# development env
+**/node_modules
+
+# operate system
+.DS_Store
