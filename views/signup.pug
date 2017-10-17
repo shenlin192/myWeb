@@ -1,0 +1,70 @@
+extends layout
+
+block extendedHead
+    link(rel='stylesheet', href='/stylesheets/auth.css')
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    script.
+        // background animation
+
+
+
+block content
+    div.auth
+        div.auth-title
+            span Sign up an account
+
+        form.auth-fields
+            -
+                var inputsInfo = [
+                {
+                    placeholder: "Username",
+                    name:"userName",
+                    type:"text",
+                    icon: "person_outline",
+                    validImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png"
+                },
+                {
+                    placeholder: "Email",
+                    name:"email",
+                    type:"email",
+                    icon: "email",
+                    validImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png"
+                },
+                {
+                    placeholder: "Password",
+                    name:"password",
+                    type:"password",
+                    icon: "lock_open",
+                    validImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png"
+                },
+                {
+                    placeholder: "Confirm Password",
+                    name:"confirmPassword",
+                    type:"password",
+                    icon: "lock_outline",
+                    validImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png"
+                }
+                ];
+
+            mixin input-generator(inputInfo)
+                div.auth-field
+                    div.icon
+                        i.material-icons.md-18 #{inputInfo.icon}
+                    input(placeholder= inputInfo.placeholder type=inputInfo.type name=inputInfo.name required)
+                    div.validation
+                        img(src=inputInfo.validImage)
+
+            for inputInfo in inputsInfo
+                +input-generator(inputInfo)
+
+            div.auth-field-submit
+                input(type='submit' value='Sign up')
+                div.forgot
+                    a(href='/login') Have an account already?
+
+
+block scripts
+    script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
+    script( src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js")
+    script(src="/javascripts/signup.js")

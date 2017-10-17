@@ -1,5 +1,5 @@
 {
-  "name": "react-backend",
+  "name": "shenlin-web",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -14,20 +14,19 @@
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "jade": "~1.11.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.12.1",
     "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5",
-    "nodemon": "^1.12.1"
+    "node-sass-middleware": "^0.11.0",
+    "nodemon": "^1.12.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-rc.4",
+    "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "1.4.17"
-  },
-  "cloud-repo-tools": {
-    "test": {
-      "app": {
-        "msg": "Hello, world!"
-      }
-    },
-    "requiresKeyFile": true,
-    "requiresProjectId": true
+    "@google-cloud/nodejs-repo-tools": "1.4.17",
+    "gulp-sass": "^3.1.0",
+    "sass": "^1.0.0-beta.2"
   }
 }
