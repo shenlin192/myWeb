@@ -6,8 +6,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-  //   res.sendFile('views/construction.html', {root: './'});
+  // res.render('index', { title: 'Express' });
+    res.sendFile('views/construction.html', {root: './'});
 });
 
 router.get('/CV', function(req, res, next) {
