@@ -1,0 +1,179 @@
+@import url(https://fonts.googleapis.com/css?family=Gudea:400,700);body {
+  -webkit-perspective: 800px;
+  perspective: 800px;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Gudea', sans-serif;
+  background: url(/images/construction/bg.jpg) center top no-repeat #000;
+  -webkit-animation-name: background-animation;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-direction: alternate;
+  animation-duration: 10s;
+  animation-name: background-animation; }
+
+::-webkit-input-placeholder {
+  color: #4E546D; }
+
+p {
+  color: #5B5E6F;
+  font-size: 12px;
+  text-align: left; }
+
+.auth {
+  opacity: 1;
+  -webkit-transition-timing-function: cubic-bezier(0.68, -0.25, 0.265, 0.85);
+  -webkit-transition-property: opacity, box-shadow, top, left, -webkit-transform;
+  transition-property: transform, opacity, box-shadow, top, left, -webkit-transform;
+  -webkit-transition-duration: .5s;
+  transition-duration: .5s;
+  -webkit-transform-origin: 161px 100%;
+  transform-origin: 161px 100%;
+  -webkit-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  width: 240px;
+  border-top: 2px solid #D8312A;
+  height: 300px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  padding: 60px 40px 40px 40px;
+  background: linear-gradient(45deg, rgba(53, 57, 74, 0.87) 0%, rgba(31, 34, 46, 0.94) 100%); }
+
+.auth .validation {
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  top: 6px;
+  opacity: 0; }
+
+.auth .disclaimer {
+  position: absolute;
+  bottom: 20px;
+  left: 35px;
+  width: 250px; }
+
+.auth-title {
+  color: #afb1be;
+  height: 60px;
+  text-align: left;
+  font-size: 16px; }
+
+.auth-fields {
+  height: 208px;
+  position: absolute;
+  left: 0; }
+  .auth-fields .icon {
+    position: absolute;
+    z-index: 1;
+    left: 36px;
+    top: 10px;
+    opacity: .5;
+    color: #8b8d99; }
+  .auth-fields input[type='password'] {
+    color: #DC6180 !important; }
+  .auth-fields input[type='text'],
+  .auth-fields input[type='password'],
+  .auth-fields input[type='email'] {
+    color: #afb1be;
+    width: 190px;
+    margin-top: -2px;
+    background: #32364a;
+    left: 0;
+    padding: 10px 65px;
+    border-top: 2px solid #393d52;
+    border-bottom: 2px solid #393d52;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    font-family: 'Gudea', sans-serif;
+    font-size: 16px;
+    box-shadow: none; }
+
+.auth-field {
+  position: relative; }
+
+.auth-field-submit {
+  text-align: center;
+  position: relative;
+  top: 10%;
+  left: 0;
+  width: 90%;
+  right: 0;
+  margin: auto; }
+  .auth-field-submit input {
+    border-radius: 50px;
+    background: transparent;
+    padding: 10px 50px;
+    border: 2px solid #DC6180;
+    color: #DC6180;
+    text-transform: uppercase;
+    font-size: 11px;
+    -webkit-transition-property: background, color;
+    transition-property: background, color;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s; }
+    .auth-field-submit input:focus {
+      box-shadow: none;
+      outline: none; }
+    .auth-field-submit input:hover {
+      color: white;
+      background: #DC6180;
+      cursor: pointer;
+      -webkit-transition-property: background, color;
+      transition-property: background, color;
+      -webkit-transition-duration: .2s;
+      transition-duration: .2s; }
+  .auth-field-submit .forgot {
+    float: right;
+    font-size: 14px;
+    margin-top: 11px;
+    text-decoration: underline; }
+    .auth-field-submit .forgot a {
+      color: #afb1be; }
+
+.authent {
+  display: none;
+  background: linear-gradient(45deg, #35394a 0%, #1f222e 100%);
+  position: absolute;
+  left: 0;
+  right: 90px;
+  margin: auto;
+  width: 100px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 20px 70px;
+  top: 200px;
+  bottom: 0;
+  height: 70px;
+  opacity: 0; }
+  .authent p {
+    text-align: center;
+    color: white; }
+
+.success {
+  display: none;
+  color: #d5d8e2; }
+  .success p {
+    font-size: 14px; }
+
+.testtwo {
+  left: -320px !important; }
+
+.test {
+  box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  top: -100px !important;
+  -webkit-transform: rotateX(70deg) scale(0.8) !important;
+  transform: rotateX(70deg) scale(0.8) !important;
+  opacity: .6 !important;
+  -webkit-filter: blur(1px);
+  filter: blur(1px); }
+
+.material-icons {
+  font-size: 20px !important; }

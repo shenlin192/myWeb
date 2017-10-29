@@ -1,35 +1,15 @@
 /**
  * Created by shenlin on 12/10/2017.
  */
-// $('input[type="submit"]').click(function(){
-//     $('.login').addClass('test')
-//     setTimeout(function(){
-//         $('.login').addClass('testtwo')
-//     },300);
-//     setTimeout(function(){
-//         $(".authent").show().animate({right:-320},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-//         $(".authent").animate({opacity: 1},{duration: 200, queue: false }).addClass('visible');
-//     },500);
-//     setTimeout(function(){
-//         $(".authent").show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-//         $(".authent").animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
-//         $('.login').removeClass('testtwo')
-//     },2500);
-//     setTimeout(function(){
-//         $('.login').removeClass('test')
-//         $('.login div').fadeOut(123);
-//     },2800);
-//     setTimeout(function(){
-//         $('.success').fadeIn();
-//     },3200);
-// });
+import $ from 'jquery';
+import '../css/auth.scss';
 
 // input animations
-$('input[type="text"],input[type="password"],input[type="email"]').on('focus', function () {
+$('input[type="text"],input[type="password"],input[type="email"]').on('focus', ()=>{
     $(this).prev().animate({'opacity': '1'}, 200)
-}).on('blur', function () {
+}).on('blur', ()=>{
     $(this).prev().animate({'opacity': '.5'}, 200)
-}).on('keyup', function () {
+}).on('keyup', ()=> {
     if (!$(this).val() == '') {
         $(this).next().animate({'opacity': '1', 'right': '30'}, 200)
     } else {
@@ -38,7 +18,7 @@ $('input[type="text"],input[type="password"],input[type="email"]').on('focus', f
 });
 
 
-var constraints = {
+const constraints = {
     userName: {
         presence: true,
         format: {
@@ -65,7 +45,7 @@ var constraints = {
 
 $('form').submit(function (e) {
     e.preventDefault();
-    // var formData = $(this).serializeArray();
+    // let formData = $(this).serializeArray();
     // $.ajax({
     //     url: '/signup',
     //     type: 'POST',
@@ -89,7 +69,7 @@ function userNameCheck() {
 
 
 function emailCheck(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email)) {
         return true
     } else {
@@ -113,12 +93,12 @@ function confirmPasswordCheck() {
 
 
 if (window.DeviceOrientationEvent) {
-    var preGamma = 0 ;
-    var preBeta = 90;
+    let preGamma = 0 ;
+    let preBeta = 90;
     window.addEventListener('deviceorientation', function (event) {
-        var gamma = event.gamma;
-        var beta = event.beta;
-        var flag = false;
+        let gamma = event.gamma;
+        let beta = event.beta;
+        let flag = false;
         if(gamma > preGamma+5||gamma < preGamma-5){
             preGamma = gamma;
             flag = true;
@@ -131,8 +111,8 @@ if (window.DeviceOrientationEvent) {
 
         // create only when changes
         if(flag){
-            var xPos = (Math.round(gamma)+90)/1.8+'%';
-            var yPos = (Math.round(beta)+180)/3.6+'%';
+            let xPos = (Math.round(gamma)+90)/1.8+'%';
+            let yPos = (Math.round(beta)+180)/3.6+'%';
             console.log("gamma",gamma,"preGamma",preGamma);
             console.log("beta",beta,"preBeta",beta);
             console.log(xPos,yPos);

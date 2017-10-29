@@ -39,6 +39,7 @@ router.get('/test', function(req, res, next) {
     res.sendFile('views/test.html', {root: './'});
 });
 
+
 router.get('/test2', (req, res) => {
     db.get().collection('quotes').find().toArray(function(err, results) {
         console.log(results);
