@@ -1,6 +1,13 @@
 /**
  * Created by Daniel on 3/12/16.
  */
+import '../css/cv.css';
+import '../img/favicon.ico';
+import $ from 'jquery';
+import jQuery from 'jquery';
+import 'fullpage.js/dist/jquery.fullpage.js';
+import Highcharts from 'highcharts';
+
 new Vue ({
     el: '#intro',
 
@@ -137,7 +144,7 @@ new Vue({
     },
 
     methods: {
-        switch: function (tab, event) {
+        switchFun: function (tab, event) {
             this.curTab = tab;
             (event.target).blur();
         }

@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/CV', function(req, res, next) {
-    res.sendFile('views/cv.html', {root: './'});
+    res.sendFile('client/dist/cv.html', {root: './'});
 });
 
 router.get('/login', function(req, res, next) {

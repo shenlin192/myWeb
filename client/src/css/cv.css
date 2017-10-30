@@ -13,7 +13,6 @@
 }
 
 
-
 #fp-nav ul li a span {
     background: #DBF4FF;
     border: 1px solid #DBF4FF;
@@ -56,11 +55,9 @@
     height: 150px;
     border: solid 4px #9CD0E8;
     border-radius: 50%;
-    background-image: url("/images/cv/avatar.jpg");
+    background-image: url(../img/cv/avatar.jpg);
     background-size: cover;
 }
-
-
 
 
 

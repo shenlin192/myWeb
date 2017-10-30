@@ -1,8 +1,9 @@
 /**
  * Created by shenlin on 12/10/2017.
  */
-import $ from 'jquery';
 import '../css/auth.scss';
+import $ from 'jquery';
+
 
 // input animations
 $('input[type="text"],input[type="password"],input[type="email"]').on('focus', ()=>{
@@ -91,7 +92,7 @@ function confirmPasswordCheck() {
 }
 
 
-
+// background animation
 if (window.DeviceOrientationEvent) {
     let preGamma = 0 ;
     let preBeta = 90;
@@ -112,10 +113,7 @@ if (window.DeviceOrientationEvent) {
         // create only when changes
         if(flag){
             let xPos = (Math.round(gamma)+90)/1.8+'%';
-            let yPos = (Math.round(beta)+180)/3.6+'%';
-            console.log("gamma",gamma,"preGamma",preGamma);
-            console.log("beta",beta,"preBeta",beta);
-            console.log(xPos,yPos);
+            let yPos = (Math.round(beta))/0.9+'%';
             $('body').stop().animate({
                 'background-position-x': xPos,
                 'background-position-y': yPos
@@ -123,5 +121,5 @@ if (window.DeviceOrientationEvent) {
         }
     }, false);
 } else {
-    alert("no device support");
+    console.log("no device support");
 }
