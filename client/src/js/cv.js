@@ -8,6 +8,7 @@ import jQuery from 'jquery';
 import 'fullpage.js/dist/jquery.fullpage.js';
 import Highcharts from 'highcharts';
 
+
 new Vue ({
     el: '#intro',
 

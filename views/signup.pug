@@ -1,10 +1,11 @@
 extends layout
 
 block extendedHead
-    link(rel='stylesheet', href='css/signup.css')
     link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    title= htmlWebpackPlugin.options.title
 
 block content
+    div.overlay
     div.auth
         div.auth-title
             span Sign up an account
@@ -46,9 +47,10 @@ block content
                 div.auth-field
                     div.icon
                         i.material-icons.md-18 #{inputInfo.icon}
-                    input(placeholder= inputInfo.placeholder type=inputInfo.type name=inputInfo.name required)
+                    input(placeholder= inputInfo.placeholder type=inputInfo.type name=inputInfo.name)
                     div.validation
                         img(src=inputInfo.validImage)
+                    div.messages
 
             for inputInfo in inputsInfo
                 +input-generator(inputInfo)
@@ -58,6 +60,3 @@ block content
                 div.forgot
                     a(href='/login') Have an account already?
 
-
-block scripts
-    script(src="js/signup.bundle.js")

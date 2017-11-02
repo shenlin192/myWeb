@@ -9,7 +9,7 @@ body {
     background:url(/images/construction/bg.jpg) top center no-repeat #000;
 }
 body ::-webkit-input-placeholder {
-    color: #4E546D;
+    color: #6d738c;
 }
 body .authent {
     display: none;

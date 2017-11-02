@@ -1,32 +1,42 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 
-// var webpack = require('webpack'),
-//     webpackDevMiddleware = require('webpack-dev-middleware'),
-//     webpackHotMiddleware = require('webpack-hot-middleware'),
-//     webpackDevConfig = require('./webpack.config.js');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-var react = require('./routes/react');
+const index = require('./routes/index');
+const users = require('./routes/users');
+const react = require('./routes/react');
 
 var db = require('./models/db');
 
+// const webpack = require('webpack');
+// const webpackDevMiddleware = require('webpack-dev-middleware');
+// const config = require('./webpack.config.js');
+// const compiler = webpack(config);
+
 var app = express();
+
+// Tell express to use the webpack-dev-middleware and use the webpack.config.js
+// configuration file as a base.
+// app.use(webpackDevMiddleware(compiler, {
+//     publicPath: config.output.publicPath
+// }));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
+
 app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.static('client/dist'));
@@ -48,6 +58,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+  console.error("server error", err);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
