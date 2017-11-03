@@ -4,6 +4,11 @@ var db = require('../models/db');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+const csrf = require('csurf');
+
+var csrfProtection = csrf({ cookie: true });
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // res.render('index', { title: 'Express' });
@@ -18,12 +23,13 @@ router.get('/login', function(req, res, next) {
     res.sendFile('views/login.html', {root: './'});
 });
 
-router.get('/signup', function(req, res, next) {
+router.get('/signup', csrfProtection, function(req, res, next) {
+    var token = req.csrfToken();
+    res.cookie('csrfToken', token);
     res.sendFile('client/dist/signup.html', {root: './'});
 });
 
-router.post('/signup', function(req, res, next) {
-
+router.post('/signup', csrfProtection, function(req, res, next) {
     req.checkBody({
         userName: {
             matches:{
@@ -54,20 +60,21 @@ router.post('/signup', function(req, res, next) {
         let result = await req.getValidationResult();
 
         if (!result.isEmpty()) {
-            console.log(result.array());
-            res.json({ message: result.array()});
-            // const errors = result.array().map(function (elem) {
-            //     return elem.msg;
-            // });
-            // console.log('There are following validation errors: ' + errors.join('&&'));
+            const errors = result.array().map(function (elem) {
+                return elem.msg;
+            });
+            console.error('Server side sign up validation failed. Front-end validation may be hacked. ' + errors.join('&&'));
+            res.json({ type: "error" , message: 'Server side validation failed' });
         } else {
-            console.log('validation pass');
-            res.json({ message: 'post created!' });
+            // connect to database
+
         }
     }
 
-
     // res.json({ message: 'post created!' });
+    res.json({ type: "error" , message: 'Server side validation failed' });
+
+
 
     // db.get().collection('user').save(req.body, (err, result) => {
     //     if (err) {

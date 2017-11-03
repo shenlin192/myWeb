@@ -6,10 +6,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
+
+// routers
 const index = require('./routes/index');
 const users = require('./routes/users');
 const react = require('./routes/react');
 
+// database
 var db = require('./models/db');
 
 // const webpack = require('webpack');
@@ -42,6 +45,7 @@ app.use(express.static('public'));
 app.use(express.static('client/dist'));
 
 
+
 // router
 app.use('/', index);
 app.use('/users', users);
@@ -58,7 +62,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  console.error("server error", err);
+  // console.error("server error", err);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

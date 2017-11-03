@@ -7,7 +7,7 @@ body{
     perspective: 800px;
     height: 100vh;
     margin: 0;
-    overflow: hidden;
+    overflow: scroll;
     font-family: 'Gudea', sans-serif;
     background: url(/images/construction/bg.jpg)  center top no-repeat #000;
     -webkit-animation-name: background-animation;
@@ -17,6 +17,7 @@ body{
     animation-name: background-animation;
     //animation-iteration-count: infinite;
 }
+
 
 ::-webkit-input-placeholder {
     color: #6d738c;
@@ -55,13 +56,10 @@ p {
     transform: rotateX(0deg);
     width: 240px;
     border-top: 2px solid #D8312A;
-    height: 300px;
     position: absolute;
     left: 0;
     right: 0;
-    margin: auto;
-    top: 0;
-    bottom: 0;
+    margin: 20vh auto;
     padding: 60px 40px 40px 40px;
     background: linear-gradient(45deg, rgba(53, 57, 74, 0.87) 0%, rgba(31, 34, 46, 0.94) 100%);
     z-index: 100;
@@ -74,8 +72,9 @@ p {
     position: absolute;
     z-index: 1;
     right: 10px;
-    top: 6px;
+    top: 8px;
     opacity: 0;
+    color: #1ccc1c;
 }
 
 .auth .disclaimer {
@@ -93,9 +92,9 @@ p {
 }
 
 .auth-fields {
-    height: 208px;
-    position: absolute;
-    left: 0;
+    position: relative;
+    left:-40px;
+    width: 320px;
     .icon {
         position: absolute;
         z-index: 1;
@@ -106,6 +105,10 @@ p {
         @media (max-width: $break-small-phone) {
             left: 20px;
         }
+    }
+    .messages>p{
+        color: #DC6180;
+        text-align: center;
     }
     input[type='password'] {
         color: #DC6180 !important;
@@ -131,6 +134,12 @@ p {
             padding: 10px 45px;
         }
     }
+
+    @media (max-width: $break-small-phone) {
+        left: -20px;
+        width:280px;
+    }
+
 }
 
 .auth-field {
@@ -140,12 +149,8 @@ p {
 
 .auth-field-submit {
     text-align: center;
-    position: relative;
-    top: 10%;
-    left: 0;
     width: 90%;
-    right: 0;
-    margin: auto;
+    margin: 10% auto 5%;
     input {
         border-radius: 50px;
         background: transparent;

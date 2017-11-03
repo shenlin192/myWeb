@@ -26,14 +26,14 @@ export default function validation(constraints,formSelector, formGroupClassName,
     const inputs = document.querySelectorAll("input, textarea, select");
     for (var i = 0; i < inputs.length; ++i) {
         inputs.item(i).addEventListener("keyup", function(ev) {
-            var errors = validate(form, constraints) || {};
+            var errors = validate(form, constraints, {fullMessages: false}) || {};
             showErrorsForInput(this, errors[this.name])
         });
     }
 
     function handleFormSubmit(form) {
         // validate the form aainst the constraints
-        var errors = validate(form, constraints);
+        var errors = validate(form, constraints,{fullMessages: false});
         // then we update the form to reflect the results
         showErrors(form, errors || {});
         if (!errors) {
@@ -47,7 +47,7 @@ export default function validation(constraints,formSelector, formGroupClassName,
         form.querySelectorAll("input[name], select[name]").forEach( function(input) {
             // Since the errors can be null if no errors were found we need to handle
             // that
-            showErrorsForInput(input, errors && errors[input.name]);
+            showErrorsForInput(input, errors);
         });
     }
 
