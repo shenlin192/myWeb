@@ -1,34 +1,15 @@
 /**
- * Created by shenlin on 13/10/2017.
+ * Created by shenlin on 03/11/2017.
  */
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://shenlin:shenlin@ds115085.mlab.com:15085/my-first-mongobd',{
+    useMongoClient: true,
+}).then(()=>{
+    console.log('connection successed')
+}).catch((e)=>{
+    console.error('connection failed', e);
+});
 
-var MongoClient = require('mongodb').MongoClient;
+mongoose.Promise = global.Promise;
 
-var state = {
-    db: null,
-};
-
-exports.connect = function(url, done) {
-    if (state.db) return done();
-
-    MongoClient.connect(url, function(err, db) {
-        if (err) return done(err);
-        state.db = db;
-        done()
-    })
-};
-
-exports.get = function() {
-    return state.db
-};
-
-exports.close = function(done) {
-    if (state.db) {
-        state.db.close(function(err, result) {
-            state.db = null;
-            state.mode = null;
-            done(err)
-        })
-    }
-};
-
+module.exports = mongoose;

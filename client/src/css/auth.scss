@@ -3,19 +3,15 @@
 $break-small-phone: 480px;
 
 body{
+    box-sizing: border-box;
     -webkit-perspective: 800px;
     perspective: 800px;
     height: 100vh;
     margin: 0;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     font-family: 'Gudea', sans-serif;
     background: url(/images/construction/bg.jpg)  center top no-repeat #000;
-    -webkit-animation-name: background-animation;
-    -webkit-animation-duration: 10s;
-    -webkit-animation-direction: alternate;
-    animation-duration: 10s;
-    animation-name: background-animation;
-    //animation-iteration-count: infinite;
 }
 
 
@@ -25,13 +21,13 @@ body{
 
 .overlay{
     background: rgba(0,0,0,.5);
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
     right: 0;
     width: 100%;
-    height: 100%;
+    height: 200%;
     min-height: 580px;
     z-index: 1;
     overflow: hidden;
@@ -48,8 +44,8 @@ p {
     -webkit-transition-timing-function: cubic-bezier(0.68, -0.25, 0.265, 0.85);
     -webkit-transition-property: opacity, box-shadow, top, left, -webkit-transform;
     transition-property: transform, opacity, box-shadow, top, left, -webkit-transform;
-    -webkit-transition-duration: .5s;
-    transition-duration: .5s;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
     -webkit-transform-origin: 161px 100%;
     transform-origin: 161px 100%;
     -webkit-transform: rotateX(0deg);
@@ -59,7 +55,7 @@ p {
     position: absolute;
     left: 0;
     right: 0;
-    margin: 20vh auto;
+    margin: 20vh auto 10vh;
     padding: 60px 40px 40px 40px;
     background: linear-gradient(45deg, rgba(53, 57, 74, 0.87) 0%, rgba(31, 34, 46, 0.94) 100%);
     z-index: 100;
@@ -68,27 +64,38 @@ p {
     }
 }
 
-.auth .validation {
-    position: absolute;
-    z-index: 1;
-    right: 10px;
-    top: 8px;
-    opacity: 0;
-    color: #1ccc1c;
-}
+.auth{
+    .validation {
+        position: absolute;
+        z-index: 1;
+        right: 10px;
+        top: 8px;
+        opacity: 0;
+        color: #1ccc1c;
+    }
+    .disclaimer {
+        position: absolute;
+        bottom: 20px;
+        left: 35px;
+        width: 250px;
+    }
 
-.auth .disclaimer {
-    position: absolute;
-    bottom: 20px;
-    left: 35px;
-    width: 250px;
-}
 
-.auth-title {
-    color: #afb1be;
-    height: 60px;
-    text-align: left;
-    font-size: 16px;
+    .auth-title {
+        color: #afb1be;
+        height: 60px;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .success {
+        display: none;
+        color: #d5d8e2;
+        p {
+            font-size: 18px;
+            color: #a7abb6;
+        }
+    }
 }
 
 .auth-fields {
@@ -102,10 +109,25 @@ p {
         top: 10px;
         opacity: .5;
         color: #8b8d99;
+        filter: brightness(1);
+        -webkit-transition-property: opacity, filter;
+        transition-property: opacity, filter;
+        -webkit-transition-duration: .4s;
+        transition-duration: .4s;
         @media (max-width: $break-small-phone) {
             left: 20px;
         }
     }
+
+    .icon-animation{
+        opacity: 1;
+        filter: brightness(1.8);
+    }
+
+    .auth-field {
+        position: relative;
+    }
+
     .messages>p{
         color: #DC6180;
         text-align: center;
@@ -142,9 +164,6 @@ p {
 
 }
 
-.auth-field {
-    position: relative;
-}
 
 
 .auth-field-submit {
@@ -159,15 +178,11 @@ p {
         color: #DC6180;
         text-transform: uppercase;
         font-size: 11px;
-        -webkit-transition-property: background, color;
-        transition-property: background, color;
-        -webkit-transition-duration: .2s;
-        transition-duration: .2s;
         &:focus {
             box-shadow: none;
             outline: none;
         }
-        &:hover {
+        &:hover,&:focus {
             color: white;
             background: #DC6180;
             cursor: pointer;
@@ -189,7 +204,9 @@ p {
 
 }
 
-.authent {
+
+
+.processing {
     display: none;
     background: linear-gradient(45deg, #35394a 0%, #1f222e 100%);
     position: absolute;
@@ -212,19 +229,12 @@ p {
     }
 }
 
-.success {
-    display: none;
-    color: #d5d8e2;
-    p {
-        font-size: 14px;
-    }
-}
 
-.testtwo {
+.goLeft {
     left: -320px !important;
 }
 
-.test {
+.fallDown {
     box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.55);
     pointer-events: none;
     top: -100px !important;
@@ -235,6 +245,13 @@ p {
     filter: blur(1px);
 }
 
+// material
 .material-icons{
     font-size: 20px!important;
+
+}
+
+//iziToast
+.iziToast-wrapper{
+    box-sizing: border-box;
 }

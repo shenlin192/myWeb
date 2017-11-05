@@ -16,18 +16,28 @@ export default function backgroundAnimation(){
                 flag = true;
             }
 
-            if(beta > preBeta+5||beta < preBeta-5){
+            if(beta > preBeta+2||beta < preBeta-2 ){
                 preBeta = beta;
                 flag = true;
             }
 
+            // console.info(flag)
+
             // create only when changes
             if(flag){
-                let xPos = (Math.round(gamma)+90)/1.8+'%';
-                let yPos = (Math.round(beta))/0.9+'%';
+                let xPos = (Math.round(gamma)+90)/1.8;
+                let yPos = (Math.round(beta)+180)/3.6;
+                // console.info('math',xPos,yPos);
+
+                if(yPos>100){
+                    yPos = 100
+                }
+
+                // console.log(xPos,yPos);
+
                 $('body').stop().animate({
-                    'background-position-x': xPos,
-                    'background-position-y': yPos
+                    'background-position-x': xPos+'%',
+                    'background-position-y': yPos+'%'
                 }, 3000, 'linear');
             }
         }, false);

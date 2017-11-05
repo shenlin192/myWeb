@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('shenlinWeb:server');
 var http = require('http');
-var db = require('../models/db');
+// var db = require('../models/db');
 
 /**
  * Get port from environment and store in Express.
@@ -22,24 +22,9 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-/**
- * Connect to mongoDb and Listen on provided port, on all network interfaces.
- */
-
-db.connect('mongodb://shenlin:shenlin@ds115085.mlab.com:15085/my-first-mongobd', function(err) {
-    if (err) {
-        console.log('Unable to connect to Mongo.');
-        server.listen(port);
-        server.on('error', onError);
-        server.on('listening', onListening);
-        // process.exit(1)
-    } else {
-        server.listen(port);
-        server.on('error', onError);
-        server.on('listening', onListening);
-    }
-});
-
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.

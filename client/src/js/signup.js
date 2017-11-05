@@ -2,12 +2,18 @@
  * Created by shenlin on 12/10/2017.
  */
 import '../css/auth.scss';
+
 import $ from 'jquery';
+import 'jquery-ui-bundle';
+import './common/csrf.ajaxSetup';
 import backgroundAnimation from "./common/background.animation";
 import validation from './common/validation';
-import izitoast from 'izitoast';
+import iziToast from 'izitoast';
+import "babel-polyfill";
 
 backgroundAnimation();
+
+
 
 const configuration = {
     userName: {
@@ -54,6 +60,9 @@ const configuration = {
         }
     },
     confirmPassword: {
+        presence: {
+            message: "Password confirmation is required"
+        },
         equality: {
             attribute: "password",
             message: "Doesn't match password",
@@ -61,79 +70,159 @@ const configuration = {
     }
 } ;
 
+const formSelector = 'form';
+const formGroupClassName = 'auth-field';
+const messageSelector = '.messages'
+
 
 // input animations
 $('input[type="text"],input[type="password"],input[type="email"]').on('focus', (event)=>{
-    $(event.currentTarget).prev().animate({'opacity': '1'}, 200)
+    // $(event.currentTarget).prev().animate({'opacity': '1', 'brightness' : '1.5'}, 200)
+    $(event.currentTarget).prev().addClass('icon-animation')
 }).on('blur', ()=>{
-    $(event.currentTarget).prev().animate({'opacity': '.5'}, 200)
+    $(event.currentTarget).prev().removeClass('icon-animation')
+    // $(event.currentTarget).prev().animate({'opacity': '.5', 'filter' : 'brightness(1)'}, 200)
 }).on('keyup', ()=> {
     // If input not in errors, show animation
-    const result = validation(configuration,'form','auth-field', ".messages");
+    let result = validation(configuration,formSelector,formGroupClassName,messageSelector);
 
     if(result){
-        // has error
-        if(!result.hasOwnProperty(event.target.name)){
+
+        if(!result.hasOwnProperty(event.target.name)&& event.target.value){
             $(event.currentTarget).next().animate({'opacity': '1', 'right': '30'}, 200)
         }else{
             $(event.currentTarget).next().animate({'opacity': '0', 'right': '30'}, 200)
         }
+
     }else{
-        // validation pass
         $(event.currentTarget).next().animate({'opacity': '1', 'right': '30'}, 200)
     }
 });
 
 
 
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
-            function getCookie(name) {
-                var cookieValue = null;
-                if (document.cookie && document.cookie != '') {
-                    var cookies = document.cookie.split(';');
-                    for (var i = 0; i < cookies.length; i++) {
-                        var cookie = $.trim(cookies[i]);
-                        // Does this cookie string begin with the name we want?
-                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
+
+$('input[type="submit"]').on('click',function (e) {
+
+    const result =  validation(configuration,formSelector,formGroupClassName,messageSelector);
+
+    if(result){
+        return 0
+    }
+
+    let formData = $('form').serializeArray();
+
+    post();
+
+    async function post(){
+        const res = await $.ajax({
+            url: '/signup',
+            type: 'POST',
+            data: formData,
+            dataType: "json"
+        }).catch((e)=>{ console.error(e);});
+
+        if(res.type === "error"){
+            iziToast.error({
+                title: 'Error',
+                message: res.message,
+                position: 'topCenter',
+            });
+        }else{
+            const processing = $(".processing");
+            const auth =  $('.auth');
+
+            auth.addClass('fallDown');
+
+            setTimeout(function(){
+                auth.addClass('goLeft');
+            },300);
+            setTimeout(function(){
+                processing.show().animate({right:'-25vw'},{easing : 'easeOutQuint' ,duration: 600, queue: false });
+                processing.animate({opacity: 1},{duration: 200, queue: false });
+            },500);
+            setTimeout(function(){
+                processing.show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
+                processing.animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
+                auth.removeClass('goLeft')
+            },2500);
+            setTimeout(function(){
+                auth.removeClass('fallDown');
+                $('.auth .auth-title').fadeOut(123);
+                $('.auth .auth-fields').fadeOut(123);
+            },2800);
+            setTimeout(function(){
+                $('.auth .success').fadeIn();
+                // count down
+                let sec = 9;
+                const timer = setInterval(function () {
+                    const span = $('.success span');
+                    span.animate({
+                        opacity: 0.25,
+                    }, 500, function() {
+                        span.css('opacity', 1);
+                        span.text(sec--);
+                    });
+
+                    if (sec == -1) {
+                        span.fadeOut('fast');
+                        clearInterval(timer);
+                        window.location.href = '/login';
                     }
-                }
-                return cookieValue;
-            }
-            if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                // Only send the token to relative URLs i.e. locally.
-                xhr.setRequestHeader("X-CSRF-Token", getCookie('csrfToken'));
-            }
+                }, 1000);
+
+            },3200);
+
+
+            // await countDown(sec);
+            //
+            // window.location.replace('/login');
+            //
+            // function countDown(sec){
+            //     return new Promise(
+            //         function (resolve, reject) {
+            //             const timer = setInterval(function () {
+            //                 const span = $('.success span');
+            //                 span.animate({
+            //                     opacity: 0.25,
+            //                 }, 500, function() {
+            //                     span.css('opacity', 1);
+            //                     span.text(sec--);
+            //                 });
+            //
+            //                 if (sec == -1) {
+            //                     span.fadeOut('fast');
+            //                     clearInterval(timer);
+            //                     resolve();
+            //                 }
+            //             }, 1000);
+            //         }
+            //     );
+            // }
+
+            // await (()=>
+            //      new Promise((resolve, reject)=> {
+            //         const timer = setInterval(()=> {
+            //             const span = $('.success span');
+            //             span.animate({
+            //                 opacity: 0.25,
+            //             }, 500, ()=> {
+            //                 span.css('opacity', 1);
+            //                 span.text(sec--);
+            //             });
+            //
+            //             if (sec == -1) {
+            //                 span.fadeOut('fast');
+            //                 clearInterval(timer);
+            //                 resolve();
+            //                 }
+            //             }, 1000);
+            //         }
+            //     )
+            // )()
+
+
         }
     }
 });
 
-
-
-$('form').submit(function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();    // or it will submit twice
-
-    let formData = $(this).serializeArray();
-
-    $.ajax({
-        url: '/signup',
-        type: 'POST',
-        data: formData,
-        dataType: "json",
-    }).done((res)=>{
-        // console.log(res)
-        if(res.type==="error"){
-            iziToast.error({
-                title: 'Error',
-                message: res.message
-            });
-        }
-    }).fail((e)=>{
-        console.error(e);
-    });
-});

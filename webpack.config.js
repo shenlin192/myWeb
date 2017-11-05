@@ -45,7 +45,7 @@ module.exports  = {
                 use: [{
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015']
+                        presets: ['es2015','stage-0']
                     }
                 }]
             },
@@ -56,11 +56,11 @@ module.exports  = {
             },
         ],
     },
-    // resolve: {
-    //     alias: {
-    //         jQuery: 'jquery/dist/jquery.js'
-    //     }
-    // },
+    resolve: {
+        alias: {
+            jQuery: 'jquery/dist/jquery.js'
+        }
+    },
     // resolve: {
     //     modules: [
     //         path.resolve('./views'),

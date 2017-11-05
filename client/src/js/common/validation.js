@@ -2,6 +2,7 @@
  * Created by shenlin on 02/11/2017.
  */
 import validate from "validate.js";
+import _ from "underscore";
 
 /**
  * Adds two numbers
@@ -12,7 +13,7 @@ import validate from "validate.js";
  * @return {Object} error
  */
 
-export default function validation(constraints,formSelector, formGroupClassName, messageSelector ){
+export default function validation(constraints,formSelector, formGroupClassName, messageSelector){
 
     // Hook up the form so we can prevent it from being posted
     const form = document.querySelector(formSelector);
@@ -44,10 +45,10 @@ export default function validation(constraints,formSelector, formGroupClassName,
     // Updates the inputs with the validation errors
     function showErrors(form, errors) {
         // We loop through all the inputs and show the errors for that input
-        form.querySelectorAll("input[name], select[name]").forEach( function(input) {
+        _.each(form.querySelectorAll("input[name], select[name]"), function(input) {
             // Since the errors can be null if no errors were found we need to handle
             // that
-            showErrorsForInput(input, errors);
+            showErrorsForInput(input, errors && errors[input.name]);
         });
     }
 
@@ -64,7 +65,7 @@ export default function validation(constraints,formSelector, formGroupClassName,
             // we first mark the group has having errors
             formGroup.classList.add("has-error");
             // then we append all the errors
-            errors.forEach(function(error) {
+            _.each(errors, function(error) {
                 addError(messages, error);
             });
         } else {
@@ -90,7 +91,7 @@ export default function validation(constraints,formSelector, formGroupClassName,
         formGroup.classList.remove("has-error");
         formGroup.classList.remove("has-success");
         // and remove any old messages
-        formGroup.querySelectorAll(".help-block.error").forEach(function(el) {
+        _.each(formGroup.querySelectorAll(".help-block.error"), function(el) {
             el.parentNode.removeChild(el);
         });
     }
@@ -107,7 +108,7 @@ export default function validation(constraints,formSelector, formGroupClassName,
 
     function showSuccess() {
         // We made it \:D/
-        alert("Success!");
+        // alert("Success!");
     }
 
     return validate(form, constraints, {fullMessages: false});

@@ -13,7 +13,7 @@ const users = require('./routes/users');
 const react = require('./routes/react');
 
 // database
-var db = require('./models/db');
+// var db = require('./models/db');
 
 // const webpack = require('webpack');
 // const webpackDevMiddleware = require('webpack-dev-middleware');

@@ -2,6 +2,7 @@ extends layout
 
 block extendedHead
     link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.5/css/iziToast.min.css")
     title= htmlWebpackPlugin.options.title
 
 block content
@@ -56,8 +57,19 @@ block content
             for inputInfo in inputsInfo
                 +input-generator(inputInfo)
 
-            div.auth-field-submit
+            div.auth-field.auth-field-submit
                 input(type='submit' value='Sign up')
                 div.forgot
                     a(href='/login') Have an account already?
 
+        div.success
+            h2 Sign Up Successful
+            p Please confirm your email
+            p
+                | Redirection to login page in &#32;
+                span 10
+                | &#32; seconds
+
+    div.processing
+        img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/puff.svg')
+        p Processing
