@@ -12,11 +12,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports  = {
     entry: {
         signup:'./client/src/js/signup.js',
-        // cv: './client/src/js/cv.js'
+        login: './client/src/js/login.js',
+        cv: './client/src/js/cv.js'
     },
     output: {
         path: path.resolve(__dirname,'./client/dist/'),
         filename: 'js/[name].bundle.js',
+        publicPath:'/'
     },
     module:{
         rules:[
@@ -83,21 +85,25 @@ module.exports  = {
         new ExtractTextPlugin({
             filename: 'css/[name].css'
         }),
-        // new HtmlWebpackPlugin({
-        //     template: path.join(__dirname, 'views', 'cv.html'),
-        //     inject: 'body',
-        //     chunks: ['cv'],
-        //     filename: 'cv.html'
-        // }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'cv.html'),
+            inject: 'body',
+            chunks: ['cv'],
+            filename: 'cv.html'
+        }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'views', 'signup.pug'),
             title: 'Sign up',
-            options:{
-                title: 'Sign up'
-            },
             inject: 'body',
             chunks: ['signup'],
             filename: 'signup.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'login.pug'),
+            title: 'Log in',
+            inject: 'body',
+            chunks: ['login'],
+            filename: 'login.html',
         }),
         new CleanWebpackPlugin(['client/dist'])
     ]

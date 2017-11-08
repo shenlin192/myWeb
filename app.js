@@ -1,14 +1,22 @@
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
 
+//authentication
+const session = require('express-session');
+const passport = require('passport');
+// const LocalStrategy = require('passport-local').Strategy;
+const crypto = require("crypto");
+const expressValidator = require('express-validator');
 
 // routers
 const index = require('./routes/index');
+const account = require('./routes/account');
 const users = require('./routes/users');
 const react = require('./routes/react');
 
@@ -44,10 +52,19 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.static('client/dist'));
 
+app.use(session({
+    secret: crypto.randomBytes(10).toString(),
+    resave: false, // don't renew the session cookies
+    saveUninitialized: false, // don't send cookies unless logged in
+    // cookie: { secure: true }
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 // router
 app.use('/', index);
+app.use('/account', account);
 app.use('/users', users);
 app.use('/react', react);
 

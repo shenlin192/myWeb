@@ -72,16 +72,14 @@ const configuration = {
 
 const formSelector = 'form';
 const formGroupClassName = 'auth-field';
-const messageSelector = '.messages'
+const messageSelector = '.messages';
 
 
 // input animations
 $('input[type="text"],input[type="password"],input[type="email"]').on('focus', (event)=>{
-    // $(event.currentTarget).prev().animate({'opacity': '1', 'brightness' : '1.5'}, 200)
     $(event.currentTarget).prev().addClass('icon-animation')
 }).on('blur', ()=>{
     $(event.currentTarget).prev().removeClass('icon-animation')
-    // $(event.currentTarget).prev().animate({'opacity': '.5', 'filter' : 'brightness(1)'}, 200)
 }).on('keyup', ()=> {
     // If input not in errors, show animation
     let result = validation(configuration,formSelector,formGroupClassName,messageSelector);
@@ -116,7 +114,7 @@ $('input[type="submit"]').on('click',function (e) {
 
     async function post(){
         const res = await $.ajax({
-            url: '/signup',
+            url: '/account/signup',
             type: 'POST',
             data: formData,
             dataType: "json"
@@ -167,7 +165,7 @@ $('input[type="submit"]').on('click',function (e) {
                     if (sec == -1) {
                         span.fadeOut('fast');
                         clearInterval(timer);
-                        window.location.href = '/login';
+                        window.location.href = '/account/login';
                     }
                 }, 1000);
 

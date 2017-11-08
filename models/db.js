@@ -2,7 +2,9 @@
  * Created by shenlin on 03/11/2017.
  */
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://shenlin:shenlin@ds115085.mlab.com:15085/my-first-mongobd',{
+
+console.log(process.env.DB_URL);
+mongoose.connect(process.env.DB_URL,{
     useMongoClient: true,
 }).then(()=>{
     console.log('connection successed')

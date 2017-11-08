@@ -1,3 +1,58 @@
-//
-   Created by shenlin on 13/10/2017.
+extends layout
 
+block extendedHead
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.5/css/iziToast.min.css")
+    title= htmlWebpackPlugin.options.title
+
+block content
+    div.overlay
+    div.auth
+        div.auth-title
+            span Login to your account
+
+        form.auth-fields
+            -
+                var inputsInfo = [
+                {
+                placeholder: "Username/Email",
+                name:"account",
+                type:"text",
+                icon: "person_outline",
+                validImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png"
+                },
+                {
+                placeholder: "Password",
+                name:"password",
+                type:"password",
+                icon: "lock_open",
+                validImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png"
+                }
+                ];
+
+            mixin input-generator(inputInfo)
+                div.auth-field
+                    div.icon
+                        i.material-icons.md-18 #{inputInfo.icon}
+                    input(placeholder= inputInfo.placeholder type=inputInfo.type name=inputInfo.name)
+                    div.validation
+                        //img(src=inputInfo.validImage)
+                        i.material-icons done
+                    div.messages
+
+            for inputInfo in inputsInfo
+                +input-generator(inputInfo)
+
+            div.auth-field.auth-field-submit
+                input(type='submit' value='Log in')
+                div.forgot
+                    a(href='/account/login') Forgotten password?
+
+        div.success
+            h2 Authentication Success
+            p Welcome back
+
+
+    div.processing
+        img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/puff.svg')
+        p Processing
