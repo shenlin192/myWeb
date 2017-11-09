@@ -44,13 +44,17 @@ block content
                 +input-generator(inputInfo)
 
             div.auth-field.auth-field-submit
-                input(type='submit' value='Log in')
-                div.forgot
-                    a(href='/account/login') Forgotten password?
+                input#login(type='submit' value='Log in')
+                input#forget(type='submit' value='Get back password')
+
+                div.forget
+                    a Forgotten password?
+
+                div.signup
+                    a(href='/account/signup') Create an account
 
         div.success
             h2 Authentication Success
-            p Welcome back
 
 
     div.processing

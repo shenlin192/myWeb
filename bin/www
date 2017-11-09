@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 var app = require('../app');
 var debug = require('debug')('shenlinWeb:server');
-var http = require('http');
+var https = require('https');
 
 
 //
@@ -29,7 +29,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(app);
 
 server.listen(port);
 server.on('error', onError);

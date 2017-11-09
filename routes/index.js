@@ -11,8 +11,12 @@ const csrfProtection = csrf({ cookie: true });
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res, next){
+
     res.sendFile('views/construction.html', {root: './'});
+    // console.log('h----------');
+    console.log(req.user);
+    // console.log(req.isAuthenticated());
 });
 
 router.get('/CV', function(req, res, next) {

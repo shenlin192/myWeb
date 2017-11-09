@@ -11,6 +11,7 @@ body{
     overflow-y: scroll;
     font-family: 'Oswald', Arial;
     background: url(/images/construction/bg.jpg)  center top no-repeat #000;
+    background-position: 50%, 50%;
 }
 
 
@@ -169,6 +170,12 @@ p {
     text-align: center;
     width: 90%;
     margin: 10% auto 5%;
+
+    #forget{
+        display: none;
+        opacity: 0;
+    }
+
     input {
         border-radius: 50px;
         background: transparent;
@@ -191,10 +198,24 @@ p {
             transition-duration: .2s;
         }
     }
-    .forgot {
-        float: right;
+
+
+
+    .forget {
         font-size: 14px;
         margin-top: 11px;
+        text-decoration: underline;
+        a {
+            color: #afb1be;
+            cursor: pointer;
+        }
+        @media (min-width: 768px) {
+            float: right;
+        }
+    }
+    .signup{
+        font-size: 14px;
+        margin: 5%;
         text-decoration: underline;
         a {
             color: #afb1be;

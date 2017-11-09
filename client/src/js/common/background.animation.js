@@ -10,7 +10,21 @@ export default function backgroundAnimation(){
         window.addEventListener('deviceorientation', function (event) {
             let gamma = event.gamma;
             let beta = event.beta;
+
+
+
+            if(!gamma||!beta){
+                // PC
+                $('body').stop().animate({
+                    'background-position-x': '50%',
+                    'background-position-y': '0%'
+                }, 3000, 'linear');
+
+                return 0;
+            }
+
             let flag = false;
+
             if(gamma > preGamma+5||gamma < preGamma-5){
                 preGamma = gamma;
                 flag = true;
@@ -20,8 +34,6 @@ export default function backgroundAnimation(){
                 preBeta = beta;
                 flag = true;
             }
-
-            // console.info(flag)
 
             // create only when changes
             if(flag){

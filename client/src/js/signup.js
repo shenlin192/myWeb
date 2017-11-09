@@ -113,6 +113,21 @@ $('input[type="submit"]').on('click',function (e) {
     post();
 
     async function post(){
+
+
+        const processing = $(".processing");
+        const auth =  $('.auth');
+
+        auth.addClass('fallDown');
+
+        setTimeout(function(){
+            auth.addClass('goLeft');
+        },300);
+        setTimeout(function(){
+            processing.show().animate({right:'-25vw'},{easing : 'easeOutQuint' ,duration: 600, queue: false });
+            processing.animate({opacity: 1},{duration: 200, queue: false });
+        },500);
+
         const res = await $.ajax({
             url: '/account/signup',
             type: 'POST',
@@ -121,34 +136,35 @@ $('input[type="submit"]').on('click',function (e) {
         }).catch((e)=>{ console.error(e);});
 
         if(res.type === "error"){
-            iziToast.error({
-                title: 'Error',
-                message: res.message,
-                position: 'topCenter',
-            });
+
+            setTimeout(function(){
+
+                iziToast.error({
+                    title: 'Error',
+                    message: res.message,
+                    position: 'topCenter',
+                });
+
+                processing.show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
+                processing.animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
+                auth.removeClass('goLeft');
+                auth.removeClass('fallDown');
+            },1000)
+
         }else{
-            const processing = $(".processing");
-            const auth =  $('.auth');
 
-            auth.addClass('fallDown');
-
-            setTimeout(function(){
-                auth.addClass('goLeft');
-            },300);
-            setTimeout(function(){
-                processing.show().animate({right:'-25vw'},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-                processing.animate({opacity: 1},{duration: 200, queue: false });
-            },500);
             setTimeout(function(){
                 processing.show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
                 processing.animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
-                auth.removeClass('goLeft')
-            },2500);
+                auth.removeClass('goLeft');
+            },1000);
+
             setTimeout(function(){
                 auth.removeClass('fallDown');
                 $('.auth .auth-title').fadeOut(123);
                 $('.auth .auth-fields').fadeOut(123);
-            },2800);
+            },1400);
+
             setTimeout(function(){
                 $('.auth .success').fadeIn();
                 // count down
@@ -168,8 +184,7 @@ $('input[type="submit"]').on('click',function (e) {
                         window.location.href = '/account/login';
                     }
                 }, 1000);
-
-            },3200);
+            },3000);
 
 
             // await countDown(sec);

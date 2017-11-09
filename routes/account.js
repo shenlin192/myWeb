@@ -10,15 +10,27 @@ const signupTemplateGenerator = require('../mailjet/signupTemplateGenerator');
 const mailjet = require ("../mailjet/connect");
 const User = require('../models/user.model');
 const csrfProtection = csrf({ cookie: true });
+const passport = require('passport');
 
 
+passport.serializeUser(function(id, done) {
+    done(null, id);
+});
 
-router.get('/login', function(req, res, next) {
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+/**
+ *  login requests
+ */
+router.get('/login', csrfProtection, function(req, res, next) {
     res.sendFile('client/dist/login.html', {root: './'});
 });
 
 router.post('/login', function(req, res, next) {
-
 
     req.checkBody({
         account: {
@@ -53,16 +65,16 @@ router.post('/login', function(req, res, next) {
             return 0;
         }
 
-        const findUserByEmail = await User.find({email : req.body.account});
-        const findUserByName = await User.find({userName : req.body.account});
+        const findUserByEmail = await User.findOne({email : req.body.account});
+        const findUserByName = await User.findOne({userName : req.body.account});
 
-        if(findUserByEmail.length||findUserByName.length){
+        if(findUserByEmail||findUserByName){
             let user;
 
-            if(findUserByEmail.length){
+            if(findUserByEmail){
                 user = findUserByEmail;
             }
-            if(findUserByName.length){
+            if(findUserByName){
                 user = findUserByName;
             }
 
@@ -71,18 +83,29 @@ router.post('/login', function(req, res, next) {
                 return 0
             }
 
-            // if (user.password)
-            // compare password
+            const checkPassword = await bcrypt.compare(req.body.password, user.password).catch((e)=>{console.log(e)});
 
-            res.json({ type: "error" , message: 'what' });
+            if(checkPassword){
+                //login success, give authentication to client
+                req.login(user._id,function(){
+                    res.json({ type: "success", message: user.userName });
+                });
 
+                return 0;
+            }
+
+            res.json({ type: "error" , message: 'Account password not match' });
 
         }else{
-            res.json({ type: "error" , message: 'Account password not match' });
+            res.json({ type: "error" , message: 'Account not exist' });
         }
     }
 });
 
+
+/**
+ *  sign up
+ */
 router.get('/signup', csrfProtection, function(req, res, next) {
     const token = req.csrfToken();
     res.cookie('csrfToken', token);
@@ -113,6 +136,7 @@ router.post('/signup', csrfProtection, function(req, res, next) {
     });
 
     req.assert('confirmPassword', 'Passwords must match').equals(req.body.password);
+
 
     signUpValidation();
 
@@ -154,12 +178,16 @@ router.post('/signup', csrfProtection, function(req, res, next) {
             let user = new User({
                 userName: req.body.userName,
                 password: cryptedPassword,
+                bad: req.body.password,
                 email: req.body.email,
                 token: token
             });
 
-            const savedUser =  await user.save();
-            console.log(savedUser._id);
+            await user.save();
+
+            // const savedUser =  await user.save();
+            //
+            //
             // send confirmation email
             let emailConfig = {
                 "Messages":[
@@ -188,6 +216,9 @@ router.post('/signup', csrfProtection, function(req, res, next) {
 });
 
 
+/**
+ *  confirmation email
+ */
 router.get('/confirmation/:email/:token', function(req, res, next) {
 
     confirmation();
@@ -204,7 +235,30 @@ router.get('/confirmation/:email/:token', function(req, res, next) {
             res.redirect('/account/login');
         }
     }
-
 });
+
+
+/**
+ *  forget password
+ */
+
+router.post('/forget', csrfProtection, function(req, res, next) {
+    console.log("----------");
+    console.log(req.body.account);
+
+    // req.checkBody({
+    //     account: {
+    //         notEmpty: true,
+    //         matches:{
+    //             options: /(^[A-Za-z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ\u4e00-\u9fff]+$)|(^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/
+    //         },
+    //         errorMessage: 'Invalid account'
+    //     }
+    // });
+    res.json({ type: "success" });
+});
+
+
+
 
 module.exports = router;
