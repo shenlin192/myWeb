@@ -36,7 +36,8 @@
     "pug": "^2.0.0-rc.4",
     "serve-favicon": "~2.4.5",
     "underscore": "^1.8.3",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "yes-https": "0.0.4"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "1.4.17",

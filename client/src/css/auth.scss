@@ -1,6 +1,10 @@
 
 $break-small-phone: 480px;
 
+::-webkit-input-placeholder {
+    color: #6d738c;
+}
+
 body{
     box-sizing: border-box;
     -webkit-perspective: 800px;
@@ -14,9 +18,10 @@ body{
     background-position: 50%, 50%;
 }
 
-
-::-webkit-input-placeholder {
-    color: #6d738c;
+p {
+    color: #5B5E6F;
+    font-size: 12px;
+    text-align: left;
 }
 
 .overlay{
@@ -33,11 +38,6 @@ body{
     overflow: hidden;
 }
 
-p {
-    color: #5B5E6F;
-    font-size: 12px;
-    text-align: left;
-}
 
 .auth {
     opacity: 1;
@@ -90,10 +90,48 @@ p {
 
     .success {
         display: none;
-        color: #d5d8e2;
+        color: #afb1be;
+        text-align: center;
+        h2{
+            color: #afb1be;
+            height: 60px;
+            font-size: 16px;
+        }
         p {
-            font-size: 18px;
-            color: #a7abb6;
+            text-align: center;
+            bottom: 20px;
+            width: 250px;
+            font-size: 14px;
+            line-height: 22px;
+            font-weight: 400;
+            color:#8d91a3;
+            span{
+                color: #FFFFFF;
+            }
+            a{
+                color: #afb1be;
+            }
+        }
+        button{
+            border-radius: 50px;
+            background: transparent;
+            padding: 10px 20px;
+            border: 2px solid #DC6180;
+            color: #DC6180;
+            text-transform: uppercase;
+            font-size: 11px;
+            &:hover {
+                color: white;
+                background: #DC6180;
+                cursor: pointer;
+                -webkit-transition-property: background, color;
+                transition-property: background, color;
+                -webkit-transition-duration: .2s;
+                transition-duration: .2s;
+            }
+            &:focus{
+                outline:none;
+            }
         }
     }
 }
@@ -199,8 +237,6 @@ p {
         }
     }
 
-
-
     .forget {
         font-size: 14px;
         margin-top: 11px;
@@ -221,9 +257,7 @@ p {
             color: #afb1be;
         }
     }
-
 }
-
 
 
 .processing {

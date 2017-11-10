@@ -7,9 +7,17 @@ var User = db.model('User', {
     password: {type: String, required: true},
     bad: {type: String},
     email: {type: String, required: true},
-    token: {type: Number},
+    // token: {type: Number},
     active: {type: Boolean, default: false},
-    date: {type: Date, required: true, default: Date.now}
+    date: {type: Date, required: true, default: Date.now},
+    tokens: {
+        confirmEmail: {
+            value: String, date: {type: Date, default: Date.now},
+        },
+        resetPassword: {
+            value: String, date: {type: Date, default: Date.now},
+        }
+    }
 });
 
 module.exports = User;

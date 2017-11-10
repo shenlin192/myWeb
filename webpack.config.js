@@ -11,9 +11,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports  = {
     entry: {
+        cv: './client/src/js/cv.js',
         signup:'./client/src/js/signup.js',
         login: './client/src/js/login.js',
-        cv: './client/src/js/cv.js'
+        reset: './client/src/js/reset.js',
     },
     output: {
         path: path.resolve(__dirname,'./client/dist/'),
@@ -104,6 +105,13 @@ module.exports  = {
             inject: 'body',
             chunks: ['login'],
             filename: 'login.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'reset.pug'),
+            title: 'Reset Password',
+            inject: 'body',
+            chunks: ['reset'],
+            filename: 'reset.html',
         }),
         new CleanWebpackPlugin(['client/dist'])
     ]

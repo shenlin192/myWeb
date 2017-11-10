@@ -5,6 +5,7 @@ const logger = require('morgan');
 
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const yes = require('yes-https');
 
 //authentication
 const session = require('express-session');
@@ -58,14 +59,12 @@ app.use(session({
     // cookie: { secure: true }
 }));
 
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 // router
-if(process.env.NODE_ENV === 'production'){
-    app.all('*', ensureSecure);
-};
-
+app.use(yes());
 app.use('/', index);
 app.use('/account', account);
 app.use('/users', users);

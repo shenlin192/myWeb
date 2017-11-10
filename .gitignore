@@ -8,5 +8,6 @@
 /client/dist
 
 .*
+!.gitignore
 
 app.yaml

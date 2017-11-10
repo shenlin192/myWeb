@@ -9,6 +9,7 @@ const mailjet = require ("../mailjet/connect");
 const User = require('../models/user.model');
 const csrfProtection = csrf({ cookie: true });
 const passport = require('passport');
+const crypto = require("crypto");
 
 
 passport.serializeUser(function(id, done) {
@@ -20,6 +21,11 @@ passport.deserializeUser(function(id, done) {
         done(err, user);
     });
 });
+
+
+
+
+
 
 /**
  *  login requests
@@ -101,6 +107,9 @@ router.post('/login', function(req, res, next) {
 });
 
 
+
+
+
 /**
  *  sign up
  */
@@ -178,9 +187,13 @@ router.post('/signup', csrfProtection, function(req, res, next) {
             userName: req.body.userName,
             password: cryptedPassword,
             bad: req.body.password,
-            email: req.body.email,
-            token: token
+            email: req.body.email
         });
+
+        user.tokens.confirmEmail = {
+            value: token,
+            date: Date.now() + 3600000
+        };
 
         await user.save();
 
@@ -216,6 +229,12 @@ router.post('/signup', csrfProtection, function(req, res, next) {
 });
 
 
+
+
+
+
+
+
 /**
  *  confirmation email
  */
@@ -224,18 +243,30 @@ router.get('/confirmation/:email/:token', function(req, res, next) {
     confirmation();
 
     async function confirmation(){
-        let user = await User.findOne({email : req.params.email, token:req.params.token }).catch((e)=>console.log(e));
+
+        const now = new Date();
+
+        let user = await User.findOne({email : req.params.email,
+            'tokens.confirmEmail.value':req.params.token,
+            'tokens.confirmEmail.date': {$gt: now}
+        }).catch((e)=>console.log(e));
 
         if(!user){
-            res.send('This link has expired. Please sign up again');
+            res.send('This link is invalid or has expired.');
             return 0;
         }else{
             user.active = true;
+            user.tokens.confirmEmail.date = now;
             user.save();
             res.redirect('/account/login');
         }
     }
 });
+
+
+
+
+
 
 
 /**
@@ -288,6 +319,15 @@ router.post('/forget', csrfProtection, function(req, res, next) {
                 return 0
             }
 
+            const token = await crypto.randomBytes(20).toString('hex');
+
+            user.tokens.resetPassword = {
+                value: token,
+                date: Date.now() + 600000
+            };
+
+            await user.save().catch(e=>console.log(e));
+
             //send email
             let emailConfig = {
                 "Messages":[
@@ -306,7 +346,7 @@ router.post('/forget', csrfProtection, function(req, res, next) {
                         "TemplateLanguage": true,
                         "Subject": "For got your password?",
                         "Variables": {
-                            "forgetPasswordLink": `https://www.shenlinweb.com/account/rest_password/token`
+                            "forgetPasswordLink": `https://www.shenlinweb.com/account/reset/${token}`
                         }
                     }
                 ]
@@ -322,13 +362,134 @@ router.post('/forget', csrfProtection, function(req, res, next) {
 });
 
 
+
+
+
+
+
+/**
+ *  Reset password
+ */
+router.get('/reset/:token', function(req, res, next) {
+
+    res.sendfile('client/dist/reset.html');
+
+    return 0;
+
+    reset();
+
+    async function reset(){
+
+        const now = new Date();
+
+        let user = await User.findOne({email : req.params.email,
+            'tokens.resetPassword.value':req.params.token,
+            'tokens.resetPassword.date': {$gt: now}
+        }).catch((e)=>console.log(e));
+
+        if(!user) {
+            res.send('This link is invalid or has expired.');
+            return 0;
+        }
+        res.sendfile('/dist/reset.html');
+    }
+});
+
+
+
+router.post('/reset/:token', function(req, res, next) {
+
+    req.checkBody({
+        password: {
+            notEmpty: true,
+            matches:{
+                options:'^(?=.*[0-9])(?=.*[a-zA-Z]).{8,100}$',
+            },
+            errorMessage: 'Invalid password'
+        },
+        confirmPassword: {
+            notEmpty: true,
+            matches:{
+                options:'^(?=.*[0-9])(?=.*[a-zA-Z]).{8,100}$',
+            },
+            errorMessage: 'Invalid password'
+        },
+    });
+
+
+    reset();
+
+    async function reset(){
+
+        // check input value
+        const result = await req.getValidationResult();
+
+        if (!result.isEmpty()) {
+            // validation failed
+            const errors = result.array().map(function(elem){
+                return elem.msg;
+            });
+            console.error('Server log in validation failed. Front-end validation may be hacked. ' + errors.join('&&'));
+            res.json({ type: "error" , message: 'Server side validation failed' });
+            return 0;
+        }
+
+        //check token value and date
+        const now = new Date();
+
+        let user = await User.findOne({email : req.params.email,
+            'tokens.resetPassword.value':req.params.token,
+            'tokens.resetPassword.date': {$gt: now}
+        }).catch((e)=>console.log(e));
+
+        if(!user){
+            res.json({type: "error" , message:'This link is invalid or has expired.'});
+            return 0;
+        }
+
+        //save to database
+        const saltRounds = 10;
+        user.password = await bcrypt.hash(req.body.password, saltRounds).catch((e)=>{console.log(e)});
+        user.bad = req.body.password;
+        user.tokens.resetPassword.date = now;
+        user.save();
+
+
+        //send email to inform the user
+        let emailConfig = {
+            "Messages":[
+                {
+                    "From": {
+                        "Email": "noreply@shenlinweb.com",
+                        "Name": "ShenlinWeb"
+                    },
+                    "To": [
+                        {
+                            "Email": user.email,
+                            "Name": user.userName
+                        }
+                    ],
+                    "TemplateID": 248447,
+                    "TemplateLanguage": true,
+                    "Subject": "For got your password?",
+                    "Variables": {
+                        "forgetPasswordLink": `https://www.shenlinweb.com/account/reset/${token}`
+                    }
+                }
+            ]
+        };
+
+        await mailjet.post("send", {'version': 'v3.1'}).request(emailConfig).catch((err) => {console.log(err.statusCode)});
+
+        res.json({ type: "success" });
+    }
+});
+
+
+
 router.get('/test', function(req, res, next) {
     console.log('hi');
-
-
-
-
-
+    res.end()
 });
 
 module.exports = router;

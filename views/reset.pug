@@ -9,25 +9,11 @@ block content
     div.overlay
     div.auth
         div.auth-title
-            span Sign up an account
+            span Login to your account
 
         form.auth-fields
             -
                 var inputsInfo = [
-                {
-                    placeholder: "Username",
-                    name:"userName",
-                    type:"text",
-                    icon: "person_outline",
-                    validImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png"
-                },
-                {
-                    placeholder: "Email",
-                    name:"email",
-                    type:"email",
-                    icon: "email",
-                    validImage: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png"
-                },
                 {
                     placeholder: "Password",
                     name:"password",
@@ -58,22 +44,11 @@ block content
                 +input-generator(inputInfo)
 
             div.auth-field.auth-field-submit
-                input(type='submit' value='Sign up')
-                div.forget
-                    a(href='/account/login') Have an account already?
-
+                input#reset(type='submit' value='Reset password')
 
         div.success
-            h2 Thanks for creating an account with shenlinweb!
-            p You’re almost finished.
-            p We’ve sent an account activation email to you at &nbsp;
-                span
-            p Head over to your inbox and click on the "Activate My Account" button to validate your email address.
-
-            button Resend Activation E-Mail
-
-            p I have already clicked the button,&nbsp;
-                a(href='/account/login') take me to my account
+            h2 Success! Your password has been changed.
+            img(src="/images/logo.jpg")
 
     div.processing
         img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/puff.svg')

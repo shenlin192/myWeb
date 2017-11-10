@@ -1,6 +1,7 @@
 /**
- * Created by shenlin on 12/10/2017.
+ * Created by shenlin on 10/11/2017.
  */
+
 import '../css/auth.scss';
 
 import $ from 'jquery';
@@ -16,34 +17,6 @@ backgroundAnimation();
 
 
 const configuration = {
-    userName: {
-        presence: {
-            message: "Username is required",
-        },
-
-        length: {
-            minimum: 1,
-            maximum:50,
-            message: "Username should contain > 1 and < 50 characters"
-        },
-
-        format: {
-            pattern: /^[A-Za-z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ\u4e00-\u9fff]+$/,
-            message: "Username only accept English, French and Chinese characters",
-        },
-    },
-
-    email: {
-        // Email is required
-        presence: {
-            message: "Email is required"
-        },
-        // and must be an email (duh)
-        email: {
-            message: "Doesn't look like a valid email"
-        }
-    },
-
     password: {
         // Password is also required
         presence: {
@@ -98,8 +71,6 @@ $('input[type="text"],input[type="password"],input[type="email"]').on('focus', (
 });
 
 
-
-
 $('input[type="submit"]').on('click',function (e) {
 
     const result =  validation(configuration,formSelector,formGroupClassName,messageSelector);
@@ -114,7 +85,6 @@ $('input[type="submit"]').on('click',function (e) {
 
     async function post(){
 
-
         const processing = $(".processing");
         const auth =  $('.auth');
 
@@ -123,13 +93,14 @@ $('input[type="submit"]').on('click',function (e) {
         setTimeout(function(){
             auth.addClass('goLeft');
         },300);
+
         setTimeout(function(){
             processing.show().animate({right:'-25vw'},{easing : 'easeOutQuint' ,duration: 600, queue: false });
             processing.animate({opacity: 1},{duration: 200, queue: false });
         },500);
 
         const res = await $.ajax({
-            url: '/account/signup',
+            url: window.location.pathname,
             type: 'POST',
             data: formData,
             dataType: "json"
@@ -138,7 +109,6 @@ $('input[type="submit"]').on('click',function (e) {
         if(res.type === "error"){
 
             setTimeout(function(){
-
                 iziToast.error({
                     title: 'Error',
                     message: res.message,
@@ -164,79 +134,7 @@ $('input[type="submit"]').on('click',function (e) {
                 $('.auth .auth-title').fadeOut(123);
                 $('.auth .auth-fields').fadeOut(123);
                 $('.auth .success').fadeIn();
-                $('.success span').text(formData[1].value);
             },1400);
-
-            // setTimeout(function(){
-            //
-            //     // count down
-            //     let sec = 9;
-            //     const timer = setInterval(function () {
-            //         const span = $('.success span');
-            //         span.animate({
-            //             opacity: 0.25,
-            //         }, 100, function() {
-            //             span.css('opacity', 1);
-            //             span.text(sec--);
-            //         });
-            //
-            //         if (sec == -1) {
-            //             span.fadeOut('fast');
-            //             clearInterval(timer);
-            //             window.location.href = '/account/login';
-            //         }
-            //     }, 1000);
-            // },1400);
-            //
-
-            // await countDown(sec);
-            //
-            // window.location.replace('/login');
-            //
-            // function countDown(sec){
-            //     return new Promise(
-            //         function (resolve, reject) {
-            //             const timer = setInterval(function () {
-            //                 const span = $('.success span');
-            //                 span.animate({
-            //                     opacity: 0.25,
-            //                 }, 500, function() {
-            //                     span.css('opacity', 1);
-            //                     span.text(sec--);
-            //                 });
-            //
-            //                 if (sec == -1) {
-            //                     span.fadeOut('fast');
-            //                     clearInterval(timer);
-            //                     resolve();
-            //                 }
-            //             }, 1000);
-            //         }
-            //     );
-            // }
-
-            // await (()=>
-            //      new Promise((resolve, reject)=> {
-            //         const timer = setInterval(()=> {
-            //             const span = $('.success span');
-            //             span.animate({
-            //                 opacity: 0.25,
-            //             }, 500, ()=> {
-            //                 span.css('opacity', 1);
-            //                 span.text(sec--);
-            //             });
-            //
-            //             if (sec == -1) {
-            //                 span.fadeOut('fast');
-            //                 clearInterval(timer);
-            //                 resolve();
-            //                 }
-            //             }, 1000);
-            //         }
-            //     )
-            // )()
-
-
         }
     }
 });
