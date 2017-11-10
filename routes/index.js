@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var csrf = require('csurf');
-var bcrypt = require('bcrypt');
-var signupTemplateGenerator = require('../mailjet/signupTemplateGenerator');
-const mailjet = require ("../mailjet/connect");
-const User = require('../models/user.model');
-const csrfProtection = csrf({ cookie: true });
+// var passport = require('passport');
+// var LocalStrategy = require('passport-local').Strategy;
+// var csrf = require('csurf');
+// var bcrypt = require('bcrypt');
+// var signupTemplateGenerator = require('../mailjet/signupTemplateGenerator');
+// const mailjet = require ("../mailjet/connect");
+// const User = require('../models/user.model');
+// const csrfProtection = csrf({ cookie: true });
 
 
 /* GET home page. */

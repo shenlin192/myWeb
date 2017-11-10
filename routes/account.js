@@ -3,10 +3,8 @@
  */
 var express = require('express');
 var router = express.Router();
-
 const csrf = require('csurf');
 const bcrypt = require('bcrypt');
-const signupTemplateGenerator = require('../mailjet/signupTemplateGenerator');
 const mailjet = require ("../mailjet/connect");
 const User = require('../models/user.model');
 const csrfProtection = csrf({ cookie: true });
@@ -152,66 +150,68 @@ router.post('/signup', csrfProtection, function(req, res, next) {
             console.error('Server side sign up validation failed. Front-end validation may be hacked. ' + errors.join('&&'));
             res.json({ type: "error" , message: 'Server side validation failed' });
 
-        } else {
-            //check email exists
-
-            let docs = await User.find({userName : req.body.userName}).catch((e)=>{console.log(e)});
-
-            if (docs.length){
-                res.json({ type: "error" , message: 'user name already exist' });
-                return 0
-            }
-
-            docs = await User.find({email : req.body.email}).catch((e)=>{console.log(e)});
-
-            if (docs.length){
-                res.json({ type: "error" , message: 'email already exist' });
-                return 0
-            }
-
-            //hash password
-            const saltRounds = 10;
-            const cryptedPassword = await bcrypt.hash(req.body.password, saltRounds).catch((e)=>{console.log(e)});
-            const token = Math.floor(Math.random()*100000);
-
-            // save to database
-            let user = new User({
-                userName: req.body.userName,
-                password: cryptedPassword,
-                bad: req.body.password,
-                email: req.body.email,
-                token: token
-            });
-
-            await user.save();
-
-            // const savedUser =  await user.save();
-            //
-            //
-            // send confirmation email
-            let emailConfig = {
-                "Messages":[
-                    {
-                        "From": {
-                            "Email": "noreply@shenlinweb.com",
-                            "Name": "ShenlinWeb"
-                        },
-                        "To": [
-                            {
-                                "Email": req.body.email,
-                                "Name": req.body.userName
-                            }
-                        ],
-                        "Subject": "Active your account",
-                        "TextPart": "Dear passenger 1, welcome to Mailjet! May the delivery force be with you!",
-                        "HTMLPart": signupTemplateGenerator(req.body.userName, req.body.email, token)
-                    }
-                ]
-            };
-
-            await mailjet.post("send", {'version': 'v3.1'}).request(emailConfig).catch((err) => {console.log(err.statusCode)});
-            res.json({ type: "success" });
+            return 0;
         }
+
+        //check username exists
+        let docs = await User.find({userName : req.body.userName}).catch((e)=>{console.log(e)});
+
+        if (docs.length){
+            res.json({ type: "error" , message: 'user name already exist' });
+            return 0
+        }
+        //check email exists
+        docs = await User.find({email : req.body.email}).catch((e)=>{console.log(e)});
+
+        if (docs.length){
+            res.json({ type: "error" , message: 'email already exist' });
+            return 0
+        }
+
+        //hash password
+        const saltRounds = 10;
+        const cryptedPassword = await bcrypt.hash(req.body.password, saltRounds).catch((e)=>{console.log(e)});
+        const token = Math.floor(Math.random()*100000);
+
+        // save to database
+        let user = new User({
+            userName: req.body.userName,
+            password: cryptedPassword,
+            bad: req.body.password,
+            email: req.body.email,
+            token: token
+        });
+
+        await user.save();
+
+        //send email
+        let emailConfig = {
+            "Messages":[
+                {
+                    "From": {
+                        "Email": "noreply@shenlinweb.com",
+                        "Name": "ShenlinWeb"
+                    },
+                    "To": [
+                        {
+                            "Email": req.body.email,
+                            "Name": req.body.userName
+                        }
+                    ],
+                    "TemplateID": 248454,
+                    "TemplateLanguage": true,
+                    "Subject": "Active your account",
+                    "Variables": {
+                        "name": req.body.userName,
+                        "confirmationLink": `https://www.shenlinweb.com/account/confirmation/${req.body.email}/${token}`
+                    }
+                }
+            ]
+        };
+
+        await mailjet.post("send", {'version': 'v3.1'}).request(emailConfig).catch((err) => {console.log(err.statusCode)});
+        res.json({ type: "success" });
+
     }
 });
 
@@ -243,22 +243,92 @@ router.get('/confirmation/:email/:token', function(req, res, next) {
  */
 
 router.post('/forget', csrfProtection, function(req, res, next) {
-    console.log("----------");
-    console.log(req.body.account);
+    req.checkBody({
+        account: {
+            notEmpty: true,
+            matches:{
+                options: /(^[A-Za-z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ\u4e00-\u9fff]+$)|(^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/
+            },
+            errorMessage: 'Invalid account'
+        }
+    });
 
-    // req.checkBody({
-    //     account: {
-    //         notEmpty: true,
-    //         matches:{
-    //             options: /(^[A-Za-z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ\u4e00-\u9fff]+$)|(^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/
-    //         },
-    //         errorMessage: 'Invalid account'
-    //     }
-    // });
-    res.json({ type: "success" });
+    getBackPassword();
+
+    async function getBackPassword() {
+
+        const result = await req.getValidationResult();
+
+        if (!result.isEmpty()) {
+            // validation failed
+            const errors = result.array().map(function(elem){
+                return elem.msg;
+            });
+            console.error('Server log in validation failed. Front-end validation may be hacked. ' + errors.join('&&'));
+            res.json({ type: "error" , message: 'Server side validation failed' });
+            return 0;
+        }
+
+        const findUserByEmail = await User.findOne({email : req.body.account});
+        const findUserByName = await User.findOne({userName : req.body.account});
+
+        if(findUserByEmail||findUserByName){
+            let user;
+
+            if(findUserByEmail){
+                user = findUserByEmail;
+            }
+
+            if(findUserByName){
+                user = findUserByName;
+            }
+
+            if(!user.active){
+                res.json({ type: "error" , message: 'Your account is not yet active' });
+                return 0
+            }
+
+            //send email
+            let emailConfig = {
+                "Messages":[
+                    {
+                        "From": {
+                            "Email": "noreply@shenlinweb.com",
+                            "Name": "ShenlinWeb"
+                        },
+                        "To": [
+                            {
+                                "Email": user.email,
+                                "Name": user.userName
+                            }
+                        ],
+                        "TemplateID": 248447,
+                        "TemplateLanguage": true,
+                        "Subject": "For got your password?",
+                        "Variables": {
+                            "forgetPasswordLink": `https://www.shenlinweb.com/account/rest_password/token`
+                        }
+                    }
+                ]
+            };
+
+            await mailjet.post("send", {'version': 'v3.1'}).request(emailConfig).catch((err) => {console.log(err.statusCode)});
+            res.json({ type: "success" });
+
+        }else{
+            res.json({ type: "error" , message: 'Account not exist' });
+        }
+    }
 });
 
 
+router.get('/test', function(req, res, next) {
+    console.log('hi');
 
+
+
+
+
+});
 
 module.exports = router;

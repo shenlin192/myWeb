@@ -1,4 +1,3 @@
-
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -63,6 +62,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // router
+if(process.env.NODE_ENV === 'production'){
+    app.all('*', ensureSecure);
+};
+
 app.use('/', index);
 app.use('/account', account);
 app.use('/users', users);
@@ -87,6 +90,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+function ensureSecure(req, res, next){
+    if(req.secure){
+        return next();
+    }
+    res.redirect('https://' + req.hostname + req.url); // express 4.x
+}
 
 
 module.exports = app;
