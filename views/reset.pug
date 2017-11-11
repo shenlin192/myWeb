@@ -47,8 +47,12 @@ block content
                 input#reset(type='submit' value='Reset password')
 
         div.success
-            h2 Success! Your password has been changed.
             img(src="/images/logo.jpg")
+            h2 Success! Your password has been changed.
+            p
+                | Redirect to login page in &nbsp;
+                span
+                | &nbsp; seconds
 
     div.processing
         img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/puff.svg')

@@ -31,6 +31,10 @@ passport.deserializeUser(function(id, done) {
  *  login requests
  */
 router.get('/login', csrfProtection, function(req, res, next) {
+    console.log(req);
+    console.log(req.csrfToken);
+    console.log(req.csrfToken());
+    res.cookie('csrfToken', req.csrfToken());
     res.sendFile('client/dist/login.html', {root: './'});
 });
 
@@ -114,8 +118,7 @@ router.post('/login', function(req, res, next) {
  *  sign up
  */
 router.get('/signup', csrfProtection, function(req, res, next) {
-    const token = req.csrfToken();
-    res.cookie('csrfToken', token);
+    res.cookie('csrfToken', req.csrfToken());
     res.sendFile('client/dist/signup.html', {root: './'});
 });
 
@@ -230,6 +233,70 @@ router.post('/signup', csrfProtection, function(req, res, next) {
 
 
 
+router.post('/resend', function(req, res, next) {
+    req.checkBody({
+        email: {
+            notEmpty: true,
+            isEmail: true,
+            errorMessage: 'Invalid email'
+        },
+    });
+
+
+    resendEmail();
+
+    async function resendEmail(){
+
+        const result = await req.getValidationResult();
+
+        if (!result.isEmpty()) {
+            // validation failed
+            const errors = result.array().map(function (elem) {
+                return elem.msg;
+            });
+            console.error('Server side sign up validation failed. Front-end validation may be hacked. ' + errors.join('&&'));
+            res.json({ type: "error" , message: 'Server side validation failed' });
+
+            return 0;
+        }
+
+        //check email exists
+        let docs = await User.find({email : req.body.email}).catch((e)=>{console.log(e)});
+
+        if (!docs.length){
+            res.json({ type: "error" , message: 'email not exist' });
+            return 0
+        }
+
+        //resend email
+        let emailConfig = {
+            "Messages":[
+                {
+                    "From": {
+                        "Email": "noreply@shenlinweb.com",
+                        "Name": "ShenlinWeb"
+                    },
+                    "To": [
+                        {
+                            "Email": req.body.email,
+                            "Name": req.body.userName
+                        }
+                    ],
+                    "TemplateID": 248454,
+                    "TemplateLanguage": true,
+                    "Subject": "Active your account",
+                    "Variables": {
+                        "name": req.body.userName,
+                        "confirmationLink": `https://www.shenlinweb.com/account/confirmation/${req.body.email}/${token}`
+                    }
+                }
+            ]
+        };
+
+        await mailjet.post("send", {'version': 'v3.1'}).request(emailConfig).catch((err) => {console.log(err.statusCode)});
+        res.json({ type: "success" });
+    }
+});
 
 
 
@@ -238,7 +305,9 @@ router.post('/signup', csrfProtection, function(req, res, next) {
 /**
  *  confirmation email
  */
-router.get('/confirmation/:email/:token', function(req, res, next) {
+router.get('/confirmation/:email/:token', csrfProtection, function(req, res, next) {
+
+    res.cookie('csrfToken', req.csrfToken());
 
     confirmation();
 
@@ -274,6 +343,7 @@ router.get('/confirmation/:email/:token', function(req, res, next) {
  */
 
 router.post('/forget', csrfProtection, function(req, res, next) {
+
     req.checkBody({
         account: {
             notEmpty: true,
@@ -344,7 +414,7 @@ router.post('/forget', csrfProtection, function(req, res, next) {
                         ],
                         "TemplateID": 248447,
                         "TemplateLanguage": true,
-                        "Subject": "For got your password?",
+                        "Subject": "Forgot your password?",
                         "Variables": {
                             "forgetPasswordLink": `https://www.shenlinweb.com/account/reset/${token}`
                         }
@@ -370,11 +440,9 @@ router.post('/forget', csrfProtection, function(req, res, next) {
 /**
  *  Reset password
  */
-router.get('/reset/:token', function(req, res, next) {
+router.get('/reset/:token', csrfProtection, function(req, res, next) {
 
-    res.sendfile('client/dist/reset.html');
-
-    return 0;
+    res.cookie('csrfToken', req.csrfToken());
 
     reset();
 
@@ -382,7 +450,7 @@ router.get('/reset/:token', function(req, res, next) {
 
         const now = new Date();
 
-        let user = await User.findOne({email : req.params.email,
+        let user = await User.findOne({
             'tokens.resetPassword.value':req.params.token,
             'tokens.resetPassword.date': {$gt: now}
         }).catch((e)=>console.log(e));
@@ -391,13 +459,13 @@ router.get('/reset/:token', function(req, res, next) {
             res.send('This link is invalid or has expired.');
             return 0;
         }
-        res.sendfile('/dist/reset.html');
+        res.sendfile('client/dist/reset.html');
     }
 });
 
 
 
-router.post('/reset/:token', function(req, res, next) {
+router.post('/reset/:token', csrfProtection,  function(req, res, next) {
 
     req.checkBody({
         password: {
@@ -437,7 +505,7 @@ router.post('/reset/:token', function(req, res, next) {
         //check token value and date
         const now = new Date();
 
-        let user = await User.findOne({email : req.params.email,
+        let user = await User.findOne({
             'tokens.resetPassword.value':req.params.token,
             'tokens.resetPassword.date': {$gt: now}
         }).catch((e)=>console.log(e));
@@ -469,12 +537,10 @@ router.post('/reset/:token', function(req, res, next) {
                             "Name": user.userName
                         }
                     ],
-                    "TemplateID": 248447,
+                    "TemplateID": 249251,
                     "TemplateLanguage": true,
-                    "Subject": "For got your password?",
-                    "Variables": {
-                        "forgetPasswordLink": `https://www.shenlinweb.com/account/reset/${token}`
-                    }
+                    "Subject": "Sign Up Confirmation ",
+                    "Variables": {}
                 }
             ]
         };

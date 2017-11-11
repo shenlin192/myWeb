@@ -9,9 +9,11 @@ import $ from 'jquery';
 import 'jquery-ui-bundle';
 import './common/csrf.ajaxSetup';
 import backgroundAnimation from "./common/background.animation";
+import { processAnimation, errorAnimation, successAnimation } from './common/post.animation';
 import validation from './common/validation';
 import iziToast from 'izitoast';
 import "babel-polyfill";
+
 //
 backgroundAnimation();
 
@@ -75,10 +77,15 @@ $('input[type="text"],input[type="password"],input[type="email"]').on('focus', (
 });
 
 
-const processing = $(".processing");
-const auth =  $('.auth');
 
 
+
+
+
+
+/**
+ * login
+ */
 $('#login').on('click',function (e) {
 
     const result =  validation(configuration,formSelector,formGroupClassName,messageSelector);
@@ -94,14 +101,13 @@ $('#login').on('click',function (e) {
     async function post(){
 
         processAnimation();
-
+``
         const res = await $.ajax({
             url: '/account/login',
             type: 'POST',
             data: formData,
             dataType: "json"
         }).catch((e)=>{ console.error(e);});
-
 
         if(res.type === "error"){
             setTimeout(function(){
@@ -118,7 +124,8 @@ $('#login').on('click',function (e) {
             successAnimation();
             setTimeout(function(){
                 const success =  $('.auth .success');
-                success.append(`<p>Welcome Back ${res.message}</p>`);
+                success.find('h2').text('Authentication Success');
+                success.find('p').text(`Welcome Back ${res.message}`);
                 success.fadeIn();
             },1400);
         }
@@ -126,7 +133,12 @@ $('#login').on('click',function (e) {
 });
 
 
-//forget pass word
+
+
+
+/**
+ *  forget pass word
+ */
 $('.forget').on('click',function(e){
     e.preventDefault();
     // change layout
@@ -159,38 +171,31 @@ $('#forget').on('click',function (e){
             data: formData,
             dataType: "json"
         }).catch((e)=>{ console.error(e);});
-    }
 
+
+        if(res.type === "error"){
+            setTimeout(function(){
+                iziToast.error({
+                    title: 'Error',
+                    message: res.message,
+                    position: 'topCenter',
+                });
+                errorAnimation();
+
+            },1000);
+
+        }else{
+            successAnimation();
+            setTimeout(function(){
+                const success =  $('.auth .success');
+                success.find('h2').text('Forgot your password?');
+                success.find('p').text('An email with instructions for creating a new password has been sent to you.');
+                success.fadeIn();
+            },1400);
+        }
+    }
 });
 
 
 
-function processAnimation(){
-    auth.addClass('fallDown');
 
-    setTimeout(function(){
-        auth.addClass('goLeft');
-    },300);
-    setTimeout(function(){
-        processing.show().animate({right:'-25vw'},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-        processing.animate({opacity: 1},{duration: 200, queue: false });
-    },500);
-}
-
-function errorAnimation(){
-    processing.show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-    processing.animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
-    auth.removeClass('goLeft');
-    auth.removeClass('fallDown');
-}
-
-function successAnimation(){
-    setTimeout(function(){
-        processing.show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-        processing.animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
-        auth.removeClass('goLeft');
-        auth.removeClass('fallDown');
-        $('.auth .auth-title').fadeOut(123);
-        $('.auth .auth-fields').fadeOut(123);
-    },1000);
-}

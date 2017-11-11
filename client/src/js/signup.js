@@ -7,6 +7,7 @@ import $ from 'jquery';
 import 'jquery-ui-bundle';
 import './common/csrf.ajaxSetup';
 import backgroundAnimation from "./common/background.animation";
+import { processAnimation, errorAnimation, successAnimation } from './common/post.animation';
 import validation from './common/validation';
 import iziToast from 'izitoast';
 import "babel-polyfill";
@@ -98,7 +99,9 @@ $('input[type="text"],input[type="password"],input[type="email"]').on('focus', (
 });
 
 
-
+/**
+ * sign up
+ */
 
 $('input[type="submit"]').on('click',function (e) {
 
@@ -114,19 +117,7 @@ $('input[type="submit"]').on('click',function (e) {
 
     async function post(){
 
-
-        const processing = $(".processing");
-        const auth =  $('.auth');
-
-        auth.addClass('fallDown');
-
-        setTimeout(function(){
-            auth.addClass('goLeft');
-        },300);
-        setTimeout(function(){
-            processing.show().animate({right:'-25vw'},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-            processing.animate({opacity: 1},{duration: 200, queue: false });
-        },500);
+        processAnimation();
 
         const res = await $.ajax({
             url: '/account/signup',
@@ -144,26 +135,14 @@ $('input[type="submit"]').on('click',function (e) {
                     message: res.message,
                     position: 'topCenter',
                 });
-
-                processing.show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-                processing.animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
-                auth.removeClass('goLeft');
-                auth.removeClass('fallDown');
+                errorAnimation();
             },1000)
 
         }else{
 
-            setTimeout(function(){
-                processing.show().animate({right:90},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-                processing.animate({opacity: 0},{duration: 200, queue: false }).addClass('visible');
-                auth.removeClass('goLeft');
-            },1000);
+            successAnimation();
 
             setTimeout(function(){
-                auth.removeClass('fallDown');
-                $('.auth .auth-title').fadeOut(123);
-                $('.auth .auth-fields').fadeOut(123);
-                $('.auth .success').fadeIn();
                 $('.success span').text(formData[1].value);
             },1400);
 
@@ -241,3 +220,47 @@ $('input[type="submit"]').on('click',function (e) {
     }
 });
 
+
+
+
+/**
+ * resend confirmation email
+ */
+$('#resend').on('click',function(){
+
+    post();
+
+    async function post(){
+
+        processAnimation();
+
+        let formData = $('form').serializeArray();
+
+        const res = await $.ajax({
+            url: '/account/resend',
+            type: 'POST',
+            data: formData,
+            dataType: "json"
+        }).catch((e)=>{ console.error(e);});
+
+
+        if(res.type === "error"){
+            setTimeout(function(){
+
+                iziToast.error({
+                    title: 'Error',
+                    message: res.message,
+                    position: 'topCenter',
+                });
+                errorAnimation();
+            },1000)
+        }else{
+            successAnimation();
+            iziToast.error({
+                title: 'Success',
+                message: "An email has been send",
+                position: 'topCenter',
+            });
+        }
+    }
+});

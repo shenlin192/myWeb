@@ -134,6 +134,24 @@ $('input[type="submit"]').on('click',function (e) {
                 $('.auth .auth-title').fadeOut(123);
                 $('.auth .auth-fields').fadeOut(123);
                 $('.auth .success').fadeIn();
+
+                let sec = 9;
+                const timer = setInterval(function () {
+                    const span = $('.success span');
+                    span.animate({
+                        opacity: 0.25,
+                    }, 100, function() {
+                        span.css('opacity', 1);
+                        span.text(sec--);
+                    });
+
+                    if (sec == -1) {
+                        span.fadeOut('fast');
+                        clearInterval(timer);
+                        window.location.href = '/account/login';
+                    }
+                }, 1000);
+
             },1400);
         }
     }
