@@ -8,13 +8,15 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports  = {
     entry: {
-        cv: './client/src/js/cv.js',
-        signup:'./client/src/js/signup.js',
-        login: './client/src/js/login.js',
-        reset: './client/src/js/reset.js',
+        index: './client/src/js/index.js',
+        // cv: './client/src/js/cv.js',
+        // signup:'./client/src/js/signup.js',
+        // login: './client/src/js/login.js',
+        // reset: './client/src/js/reset.js',
     },
     output: {
         path: path.resolve(__dirname,'./client/dist/'),
@@ -59,11 +61,12 @@ module.exports  = {
             },
         ],
     },
-    resolve: {
-        alias: {
-            jQuery: 'jquery/dist/jquery.js'
-        }
-    },
+    // resolve: {
+    //     alias: {
+    //         jQuery: 'jquery/dist/jquery.js',
+    //         "window.jQuery": "jquery/dist/jquery.js"
+    //     }
+    // },
     // resolve: {
     //     modules: [
     //         path.resolve('./views'),
@@ -74,45 +77,57 @@ module.exports  = {
         contentBase: path.join(__dirname, "./client/dist"),
         compress: true,
         port: 9000,
-        proxy: {
-            '/': {
-                target: 'http://localhost:8080/',
-                secure: false
-            }
-        }
+        // publicPath:'./public',
+        // proxy: {
+        //     '/': {
+        //         target: 'http://localhost:8080/',
+        //         secure: false
+        //     }
+        // }
 
     },
     plugins:[
         new ExtractTextPlugin({
             filename: 'css/[name].css'
         }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'views', 'cv.html'),
-            inject: 'body',
-            chunks: ['cv'],
-            filename: 'cv.html'
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery" // this is obligatory for velocity-animation
         }),
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'views', 'signup.pug'),
-            title: 'Sign up',
+            template: path.join(__dirname, 'views', 'index.pug'),
             inject: 'body',
-            chunks: ['signup'],
-            filename: 'signup.html',
+            chunks: ['index'],
+            filename: 'index.html'
         }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'views', 'login.pug'),
-            title: 'Log in',
-            inject: 'body',
-            chunks: ['login'],
-            filename: 'login.html',
-        }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'views', 'reset.pug'),
-            title: 'Reset Password',
-            inject: 'body',
-            chunks: ['reset'],
-            filename: 'reset.html',
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: path.join(__dirname, 'views', 'cv.html'),
+        //     inject: 'body',
+        //     chunks: ['cv'],
+        //     filename: 'cv.html'
+        // }),
+        // new HtmlWebpackPlugin({
+        //     template: path.join(__dirname, 'views', 'signup.pug'),
+        //     title: 'Sign up',
+        //     inject: 'body',
+        //     chunks: ['signup'],
+        //     filename: 'signup.html',
+        // }),
+        // new HtmlWebpackPlugin({
+        //     template: path.join(__dirname, 'views', 'login.pug'),
+        //     title: 'Log in',
+        //     inject: 'body',
+        //     chunks: ['login'],
+        //     filename: 'login.html',
+        // }),
+        // new HtmlWebpackPlugin({
+        //     template: path.join(__dirname, 'views', 'reset.pug'),
+        //     title: 'Reset Password',
+        //     inject: 'body',
+        //     chunks: ['reset'],
+        //     filename: 'reset.html',
+        // }),
         new CleanWebpackPlugin(['client/dist'])
     ]
 };

@@ -539,7 +539,7 @@ router.post('/reset/:token', csrfProtection,  function(req, res, next) {
                     ],
                     "TemplateID": 249251,
                     "TemplateLanguage": true,
-                    "Subject": "Sign Up Confirmation ",
+                    "Subject": "Password changed",
                     "Variables": {}
                 }
             ]
@@ -559,3 +559,5 @@ router.get('/test', function(req, res, next) {
 });
 
 module.exports = router;
+
+

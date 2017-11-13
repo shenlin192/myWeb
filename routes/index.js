@@ -13,9 +13,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next){
 
-    res.sendFile('views/construction.html', {root: './'});
+    res.sendFile('client/dist/index.html', {root: './'});
     // console.log('h----------');
-    console.log(req.user);
     // console.log(req.isAuthenticated());
 });
 

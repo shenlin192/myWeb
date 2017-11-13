@@ -1,9 +1,21 @@
 extends layout
 
 block extendedHead
-  link(rel='stylesheet', href='/stylesheets/style123.css')
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div#welcome
+    p#browserWidthNotice Make your browser wider.
+    p No WebGL. No Canvas. Just pure DOM.
+    p
+      span#count 175 divs with border-radius and box-shadow.
+
+  a#logo(href="index.html") Velocity
+    span#logoDot .js
+
+  div#container
+
+  audio#wonder(autoplay)
+    source(src="./wonder.mp3" type="audio/mp3")
+    |Your browser does not support HTML5 audio.
+
 
