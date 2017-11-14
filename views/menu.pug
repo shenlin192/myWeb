@@ -1,0 +1,36 @@
+block content
+    nav.menu
+        input#menu-open.menu-open(type="checkbox" href="#" name="menu-open")
+        label.menu-open-button(for="menu-open")
+            span.hamburger.hamburger-1
+            span.hamburger.hamburger-2
+            span.hamburger.hamburger-3
+
+        a.menu-item(href="#")
+            i.fa.fa-bar-chart
+        a.menu-item(href="#")
+            i.fa.fa-plus
+        a.menu-item(href="#")
+            i.fa.fa-heart
+        a.menu-item(href="#")
+            i.fa.fa-envelope
+        a.menu-item(href="#")
+            i.fa.fa-cog
+        a.menu-item(href="#")
+            i.fa.fa-ellipsis-h
+
+    svg(xmlns="http://www.w3.org/2000/svg" version="1.1")
+        defs
+            filter#shadowed-goo
+                feGaussianBlur(in="SourceGraphic" result="blur" stdDeviation="10")
+                feColorMatr(in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo")
+                feGaussianBlur(in="goo" stdDeviation="3" result="shadow")
+                feColorMatrix(in="shadow" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2" result="shadow")
+                feOffset(in="shadow" dx="1" dy="1" result="shadow")
+                feComposite(in2="shadow" in="goo" result="goo")
+                feComposite(in2="goo" in="SourceGraphic" result="mix")
+            filter#goo
+                feGaussianBlur(in="SourceGraphic" result="blur" stdDeviation="10")
+                feColorMatrix(in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo")
+                feComposite(in2="goo" in="SourceGraphic" result="mix")
+

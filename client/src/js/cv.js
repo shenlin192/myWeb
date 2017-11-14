@@ -8,7 +8,6 @@ import jQuery from 'jquery';
 import 'fullpage.js/dist/jquery.fullpage.js';
 import Highcharts from 'highcharts';
 
-
 new Vue ({
     el: '#intro',
 
@@ -71,6 +70,8 @@ new Vue ({
         });
     }
 });
+
+
 
 
 new Vue({
@@ -245,10 +246,10 @@ new Vue({
         self.chart = new Highcharts.Chart('skillChart', {
             chart: {
                 type: 'bar',
-                backgroundColor: '#60BAE3',
+                backgroundColor: '#1097d5',
                 marginLeft: 80,
                 width: 500,
-                height: 400
+                height: 400,
             },
             title: {
                 text: null
@@ -259,7 +260,12 @@ new Vue({
                     text: null
                 },
                 tickWidth: 0,
-                lineWidth: 0
+                lineWidth: 0,
+                labels: {
+                    style: {
+                        color:'#FFFFFF'
+                    }
+                },
             },
             yAxis: {
                 min: 0,
@@ -303,7 +309,7 @@ new Vue({
                 {
                     name: 'background',
                     data: [],
-                    color: '#60BAE3',
+                    color: '#1097d5',
                     borderRadius: 5
                 },
                 {

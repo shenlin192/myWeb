@@ -1,6 +1,3 @@
-/**
- * Created by shenlin on 12/11/2017.
- */
 import '../css/index.scss';
 
 import $ from 'jquery';
@@ -39,10 +36,10 @@ var isWebkit = /Webkit/i.test(navigator.userAgent),
  Redirection
  ******************/
 
-if (isMobile && isAndroid && !isChrome) {
-    alert("Although shenlinweb.com works on all mobile browsers, this page is for iOS devices or Android devices running Chrome only.");
-    window.location = "index.html";
-}
+// if (isMobile && isAndroid && !isChrome) {
+//     alert("Although shenlinweb.com works on all mobile browsers, this page is for iOS devices or Android devices running Chrome only.");
+//     window.location = "index.html";
+// }
 
 /***************
  Helpers
@@ -115,13 +112,26 @@ if ((document.documentElement.clientWidth / screenWidth) < 0.80) {
  *****************/
 
 /* Fade out the welcome message. */
-$welcome.velocity({ opacity: [ 0, 0.65 ] }, { display: "none", delay: 3500, duration: 1100 });
+$welcome
+    .velocity({ opacity: [ 0, 0.65 ] }, { display: "none", delay: 4000, duration: 500, complete:function(){
+        $welcome.html("<p>Welcome to shenlinweb</p>")
+    }})
+    .velocity({ opacity: 0.75, scale:1.5 }, { duration: 3000, display: "block" })
+    .velocity({ opacity: 0 , scale:1}, {duration: 500, delay: 8000, complete:function(){
+        $welcome.html("<p>This site is currently<br/> <strong>under construction</strong></p>")
+    }})
+    .velocity({ opacity: 0.75}, { duration: 1000})
+    .velocity({ opacity: 0}, {duration: 500,  delay: 2500, complete:function(){
+        $welcome.html("But I'm working hard<br/> to create a <br/> new and fresh design.")
+    }})
+    .velocity({ opacity: 0.75, scale:1.5}, {duration: 2000})
+    .velocity({ opacity: 0, scale:1}, {duration: 1000, delay:7000});
 
 /* Animate the dots' container. */
 $container
     .css("perspective-origin", screenWidth/2 + "px " + ((screenHeight * 0.45) - chromeHeight) + "px")
-    .velocity(containerAnimationMap, { duration: 2000, delay: 5000 }).velocity("reverse",{delay: 12500 });
-
+    .velocity(containerAnimationMap, { duration: 2000, delay: 5000})
+    .velocity("reverse",{delay: 12500});
 /* Special visual enhancement for WebKit browsers, which are faster at box-shadow manipulation. */
 if (isWebkit) {
     $dots.css("boxShadow", "0px 0px 4px 0px #4bc2f1");
@@ -150,9 +160,13 @@ $dots
     .velocity("reverse", { easing: "easeOutQuad" })
     .velocity({ opacity: 0 }, { duration: 2000, complete: function() {
         $welcome
-            .html("<a href='https://www.youtube.com/watch?v=MDLiVB6g2NY&hd=1'>Watch the making of this demo.</a><br /><br />Go create something amazing.<br />Sincerely, <a href='http://twitter.com/shapiro'>@Shapiro</a>")
-            .velocity({ opacity: 0.75 }, { duration: 3500, display: "block" })
-            .find("*").add($welcome).css("pointer-events", "auto");
-    }
+            .html("<img src='/images/logo.png'/>" +
+                "<p>Your website can be amazing</p>")
+            .css("top", "25%")
+            .velocity({ opacity: 0.75 }, { duration: 3500 })
+            .velocity({ opacity: 0}, { duration: 2000, delay:3000, complete:function(){
+                $('nav').velocity( {opacity:1}, { duration: 2000})
+            }});
+        }
     })
     .appendTo($container);

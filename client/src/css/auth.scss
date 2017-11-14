@@ -1,5 +1,6 @@
 
 $break-small-phone: 480px;
+$main-color: #1097d5;
 
 ::-webkit-input-placeholder {
     color: #6d738c;
@@ -51,13 +52,13 @@ p {
     -webkit-transform: rotateX(0deg);
     transform: rotateX(0deg);
     width: 240px;
-    border-top: 2px solid #D8312A;
+    border-top: 2px solid $main-color;
     position: absolute;
     left: 0;
     right: 0;
     margin: 20vh auto 10vh;
     padding: 60px 40px 40px 40px;
-    background: linear-gradient(45deg, rgba(53, 57, 74, 0.87) 0%, rgba(31, 34, 46, 0.94) 100%);
+    background: linear-gradient(45deg, rgba(53, 57, 74, 0.3) 0%, rgba(31, 34, 46, 0.6) 100%);
     z-index: 100;
     @media (max-width: $break-small-phone) {
         padding: 60px 20px 40px 20px;
@@ -119,13 +120,13 @@ p {
             border-radius: 50px;
             background: transparent;
             padding: 10px 20px;
-            border: 2px solid #DC6180;
-            color: #DC6180;
+            border: 2px solid $main-color;
+            color: $main-color;
             text-transform: uppercase;
             font-size: 11px;
             &:hover {
                 color: white;
-                background: #DC6180;
+                background: $main-color;
                 cursor: pointer;
                 -webkit-transition-property: background, color;
                 transition-property: background, color;
@@ -174,7 +175,7 @@ p {
         text-align: center;
     }
     input[type='password'] {
-        color: #DC6180 !important;
+        color: $main-color !important;
     }
     input[type='text'],
     input[type='password'],
@@ -182,7 +183,7 @@ p {
         color: #afb1be;
         width: 190px;
         margin-top: -2px;
-        background: #32364a;
+        background:rgba(50,54,74,0.5);
         left: 0;
         padding: 10px 65px;
         border-top: 2px solid #393d52;
@@ -221,8 +222,9 @@ p {
         border-radius: 50px;
         background: transparent;
         padding: 10px 50px;
-        border: 2px solid #DC6180;
-        color: #DC6180;
+        //border: 2px solid #DC6180;
+        border: 2px solid $main-color;
+        color:$main-color;
         text-transform: uppercase;
         font-size: 11px;
         &:focus {
@@ -231,7 +233,7 @@ p {
         }
         &:hover,&:focus {
             color: white;
-            background: #DC6180;
+            background: #1097d5;
             cursor: pointer;
             -webkit-transition-property: background, color;
             transition-property: background, color;

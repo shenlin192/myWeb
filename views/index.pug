@@ -1,21 +1,28 @@
 extends layout
 
 block extendedHead
+  title= htmlWebpackPlugin.options.title
+  link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
+
+
 
 block content
   div#welcome
     p#browserWidthNotice Make your browser wider.
-    p No WebGL. No Canvas. Just pure DOM.
     p
-      span#count 175 divs with border-radius and box-shadow.
+      |The most amazing feeling of
+      br
+      |programming
+      br
+      |is the feeling to create and to destory
 
-  a#logo(href="index.html") Velocity
-    span#logoDot .js
+  a#logo(href="index.html") shenlinweb
+    span#logoDot .com
 
   div#container
-
+  //-
   audio#wonder(autoplay)
     source(src="./wonder.mp3" type="audio/mp3")
     |Your browser does not support HTML5 audio.
 
-
+  include menu.pug

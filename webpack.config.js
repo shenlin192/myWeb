@@ -13,10 +13,10 @@ var webpack = require('webpack');
 module.exports  = {
     entry: {
         index: './client/src/js/index.js',
-        // cv: './client/src/js/cv.js',
-        // signup:'./client/src/js/signup.js',
-        // login: './client/src/js/login.js',
-        // reset: './client/src/js/reset.js',
+        cv: './client/src/js/cv.js',
+        signup:'./client/src/js/signup.js',
+        login: './client/src/js/login.js',
+        reset: './client/src/js/reset.js',
     },
     output: {
         path: path.resolve(__dirname,'./client/dist/'),
@@ -97,37 +97,38 @@ module.exports  = {
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'views', 'index.pug'),
+            title: 'Home page',
             inject: 'body',
             chunks: ['index'],
             filename: 'index.html'
         }),
-        // new HtmlWebpackPlugin({
-        //     template: path.join(__dirname, 'views', 'cv.html'),
-        //     inject: 'body',
-        //     chunks: ['cv'],
-        //     filename: 'cv.html'
-        // }),
-        // new HtmlWebpackPlugin({
-        //     template: path.join(__dirname, 'views', 'signup.pug'),
-        //     title: 'Sign up',
-        //     inject: 'body',
-        //     chunks: ['signup'],
-        //     filename: 'signup.html',
-        // }),
-        // new HtmlWebpackPlugin({
-        //     template: path.join(__dirname, 'views', 'login.pug'),
-        //     title: 'Log in',
-        //     inject: 'body',
-        //     chunks: ['login'],
-        //     filename: 'login.html',
-        // }),
-        // new HtmlWebpackPlugin({
-        //     template: path.join(__dirname, 'views', 'reset.pug'),
-        //     title: 'Reset Password',
-        //     inject: 'body',
-        //     chunks: ['reset'],
-        //     filename: 'reset.html',
-        // }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'cv.html'),
+            inject: 'body',
+            chunks: ['cv'],
+            filename: 'cv.html'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'signup.pug'),
+            title: 'Sign up',
+            inject: 'body',
+            chunks: ['signup'],
+            filename: 'signup.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'login.pug'),
+            title: 'Log in',
+            inject: 'body',
+            chunks: ['login'],
+            filename: 'login.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'reset.pug'),
+            title: 'Reset Password',
+            inject: 'body',
+            chunks: ['reset'],
+            filename: 'reset.html',
+        }),
         new CleanWebpackPlugin(['client/dist'])
     ]
 };
