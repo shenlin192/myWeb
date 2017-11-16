@@ -14,6 +14,7 @@ module.exports  = {
     entry: {
         index: './client/src/js/index.js',
         cv: './client/src/js/cv.js',
+        collections: './client/src/js/collections.js',
         signup:'./client/src/js/signup.js',
         login: './client/src/js/login.js',
         reset: './client/src/js/reset.js',
@@ -93,7 +94,8 @@ module.exports  = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
-            "window.jQuery": "jquery" // this is obligatory for velocity-animation
+            "window.jQuery": "jquery", // this is obligatory for velocity-animation
+            Popper: ['popper.js', 'default'], // for bootstrap
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'views', 'index.pug'),
@@ -101,6 +103,13 @@ module.exports  = {
             inject: 'body',
             chunks: ['index'],
             filename: 'index.html'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'collections.pug'),
+            title: 'Collections',
+            inject: 'body',
+            chunks: ['collections'],
+            filename: 'collections.html'
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'views', 'cv.html'),

@@ -4,13 +4,17 @@
 import '../css/auth.scss';
 
 import $ from 'jquery';
+import iziToast from 'izitoast';
+import "babel-polyfill";
+
 import 'jquery-ui-bundle';
 import './common/csrf.ajaxSetup';
 import backgroundAnimation from "./common/background.animation";
 import { processAnimation, errorAnimation, successAnimation } from './common/post.animation';
 import validation from './common/validation';
-import iziToast from 'izitoast';
-import "babel-polyfill";
+import './navigation';
+
+
 
 backgroundAnimation();
 

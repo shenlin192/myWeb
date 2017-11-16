@@ -6,6 +6,10 @@ $main-color: #1097d5;
     color: #6d738c;
 }
 
+*{
+    box-sizing: content-box;
+}
+
 body{
     box-sizing: border-box;
     -webkit-perspective: 800px;

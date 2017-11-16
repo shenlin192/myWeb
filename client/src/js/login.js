@@ -13,6 +13,7 @@ import { processAnimation, errorAnimation, successAnimation } from './common/pos
 import validation from './common/validation';
 import iziToast from 'izitoast';
 import "babel-polyfill";
+import './navigation';
 
 //
 backgroundAnimation();
@@ -140,10 +141,14 @@ $('#login').on('click',function (e) {
  *  forget pass word
  */
 $('.forget').on('click',function(e){
-    e.preventDefault();
+    // e.preventDefault();
     // change layout
     $('input[type="password"]').closest('.auth-field').animate({right:"100%" , height:0, opacity: 0},{easing : 'easeOutQuint' ,duration: 600, queue: false });
-    $('.auth-field-submit .forget, #login').animate({left:"100%" , height:0, opacity: 0},{easing : 'easeOutQuint' ,duration: 600, queue: false });
+    $('.auth-field-submit .forget, #login').animate(
+        { height:0, opacity: 0},
+        { easing : 'easeOutQuint' ,duration: 600, queue: false, complete: function(){
+        $('.auth-field-submit .forget, #login').hide();
+    }});
     $('.auth-title span').text('Please enter your account');
     $('#forget').show().animate({opacity: 1},{easing : 'easeOutQuint' ,duration: 600, queue: false});
 1

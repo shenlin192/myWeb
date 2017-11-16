@@ -112,6 +112,7 @@ if ((document.documentElement.clientWidth / screenWidth) < 0.80) {
  *****************/
 
 /* Fade out the welcome message. */
+
 $welcome
     .velocity({ opacity: [ 0, 0.65 ] }, { display: "none", delay: 4000, duration: 500, complete:function(){
         $welcome.html("<p>Welcome to shenlinweb</p>")
@@ -127,17 +128,22 @@ $welcome
     .velocity({ opacity: 0.75, scale:1.5}, {duration: 2000})
     .velocity({ opacity: 0, scale:1}, {duration: 1000, delay:7000});
 
+
 /* Animate the dots' container. */
+
 $container
     .css("perspective-origin", screenWidth/2 + "px " + ((screenHeight * 0.45) - chromeHeight) + "px")
     .velocity(containerAnimationMap, { duration: 2000, delay: 5000})
     .velocity("reverse",{delay: 12500});
+
 /* Special visual enhancement for WebKit browsers, which are faster at box-shadow manipulation. */
 if (isWebkit) {
     $dots.css("boxShadow", "0px 0px 4px 0px #4bc2f1");
 }
 
 /* Animate the dots. */
+
+
 $dots
     .velocity({
         translateX: [

@@ -147,9 +147,32 @@ $hamburger-spacing:8px;
 
 
 .menu-item{
+    display: flex;
+    flex-direction: column;
+    i{
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        text-align: center;
+    }
+    span{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        line-height: 20px;
+        font-size: 14px;
+    }
     &:hover{
         background:white;
         color:$fg;
+        //span{
+        //    display: inline-block;
+        //}
+        //i{
+        //    display: none;
+        //}
     }
     @for $i from 1 through $menu-items{
         &:nth-child(#{$i+2}){

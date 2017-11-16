@@ -6,11 +6,12 @@ import '../css/auth.scss';
 
 import $ from 'jquery';
 import 'jquery-ui-bundle';
+import iziToast from 'izitoast';
+import "babel-polyfill";
 import './common/csrf.ajaxSetup';
 import backgroundAnimation from "./common/background.animation";
 import validation from './common/validation';
-import iziToast from 'izitoast';
-import "babel-polyfill";
+import './navigation';
 
 backgroundAnimation();
 

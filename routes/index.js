@@ -22,4 +22,8 @@ router.get('/CV', function(req, res, next) {
     res.sendFile('client/dist/cv.html', {root: './'});
 });
 
+router.get('/collections', function(req, res, next) {
+    res.sendFile('client/dist/collections.html', {root: './'});
+});
+
 module.exports = router;
