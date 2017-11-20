@@ -4,6 +4,7 @@
 # operate system
 .DS_Store
 
+/public/dashboard
 
 /client/dist
 

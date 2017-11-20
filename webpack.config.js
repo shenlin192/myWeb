@@ -15,9 +15,11 @@ module.exports  = {
         index: './client/src/js/index.js',
         cv: './client/src/js/cv.js',
         collections: './client/src/js/collections.js',
+        construction:'./client/src/js/construction.js',
         signup:'./client/src/js/signup.js',
         login: './client/src/js/login.js',
         reset: './client/src/js/reset.js',
+
     },
     output: {
         path: path.resolve(__dirname,'./client/dist/'),
@@ -110,6 +112,12 @@ module.exports  = {
             inject: 'body',
             chunks: ['collections'],
             filename: 'collections.html'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'views', 'construction.pug'),
+            inject: 'body',
+            chunks: ['construction'],
+            filename: 'construction.html'
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'views', 'cv.html'),

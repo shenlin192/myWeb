@@ -7,9 +7,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const yes = require('yes-https');
 
+//
+const db = require('./models/db');
+
 //authentication
 const session = require('express-session');
 const passport = require('passport');
+const MongoStore = require('connect-mongo')(session);
 // const LocalStrategy = require('passport-local').Strategy;
 const crypto = require("crypto");
 const expressValidator = require('express-validator');
@@ -19,6 +23,7 @@ const index = require('./routes/index');
 const account = require('./routes/account');
 const users = require('./routes/users');
 const react = require('./routes/react');
+const api = require('./routes/api');
 
 // database
 // var db = require('./models/db');
@@ -53,9 +58,12 @@ app.use(express.static('public'));
 app.use(express.static('client/dist'));
 
 app.use(session({
-    secret: crypto.randomBytes(10).toString(),
-    resave: false, // don't renew the session cookies
-    saveUninitialized: false, // don't send cookies unless logged in
+    // secret: crypto.randomBytes(10).toString(),
+    secret: '123',
+    resave: true, // don't renew the session cookies
+    saveUninitialized: true, // don't send cookies unless logged in
+    // using store session on MongoDB using express-session + connect
+    store: new MongoStore({ mongooseConnection: db.connection })
     // cookie: { secure: true }
 }));
 
@@ -63,12 +71,24 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// force secure connect
+if (process.env.NODE_ENV == 'production') {
+    function requireHTTPS(req, res, next) {
+        if (!req.secure) {
+            //FYI this should work for local development as well
+            return res.redirect('https://' + req.get('host') + req.url);
+        }
+        next();
+    }
+    app.use(requireHTTPS);
+}
+
 // router
-app.use(yes());
 app.use('/', index);
 app.use('/account', account);
 app.use('/users', users);
 app.use('/react', react);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

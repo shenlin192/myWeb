@@ -1,0 +1,31 @@
+extends layout
+block extendedHead
+    title Coming Soon
+    // CSS
+    link(rel="stylesheet", href="stylesheets/construction/style.css")
+    link(rel="stylesheet", href="stylesheets/construction/bootstrap-light.css")
+    link(href="https://fonts.googleapis.com/css?family=Oswald:400,300,700", rel="stylesheet", type="text/css")
+    link(rel="icon", type="image/png", sizes="16x16", href="/images/favicon.ico")
+
+block content
+    include navigation
+    body
+        .overlay
+        #wrap
+            .container
+                img.image-align(src="images/construction/paperplane.png", alt="Paper Plane")
+                h1
+                    span I'm
+                    br
+                    | 			Reaching For
+                    span.yellow The Moon.
+                p
+                    | This page is currently
+                    strong under construction
+                    |  but I'm working hard
+                    br
+                    |  to create a new and fresh design.
+                p.copyright
+                    | All right reserved by
+                    a(href="https://shenlinweb.com", target="_blank") shenlinweb.com
+

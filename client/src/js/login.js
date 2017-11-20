@@ -145,9 +145,9 @@ $('.forget').on('click',function(e){
     // change layout
     $('input[type="password"]').closest('.auth-field').animate({right:"100%" , height:0, opacity: 0},{easing : 'easeOutQuint' ,duration: 600, queue: false });
     $('.auth-field-submit .forget, #login').animate(
-        { height:0, opacity: 0},
+        { height:0, opacity: 0, margin:0},
         { easing : 'easeOutQuint' ,duration: 600, queue: false, complete: function(){
-        $('.auth-field-submit .forget, #login').hide();
+            // $('.auth-field-submit .forget, #login').hide();
     }});
     $('.auth-title span').text('Please enter your account');
     $('#forget').show().animate({opacity: 1},{easing : 'easeOutQuint' ,duration: 600, queue: false});

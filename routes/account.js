@@ -31,9 +31,11 @@ passport.deserializeUser(function(id, done) {
  *  login requests
  */
 router.get('/login', csrfProtection, function(req, res, next) {
-    console.log(req);
-    console.log(req.csrfToken);
-    console.log(req.csrfToken());
+    // console.log(req);
+    // console.log(req.csrfToken);
+    // console.log(req.csrfToken());
+    console.log(req.user);
+    console.log(req.isAuthenticated())
     res.cookie('csrfToken', req.csrfToken());
     res.sendFile('client/dist/login.html', {root: './'});
 });
@@ -431,12 +433,6 @@ router.post('/forget', csrfProtection, function(req, res, next) {
     }
 });
 
-
-
-
-
-
-
 /**
  *  Reset password
  */
@@ -554,10 +550,15 @@ router.post('/reset/:token', csrfProtection,  function(req, res, next) {
 
 
 router.get('/test', function(req, res, next) {
-    console.log('hi');
+    console.log(req.isAuthenticated());
     res.end()
 });
 
 module.exports = router;
+
+
+
+
+
 
 

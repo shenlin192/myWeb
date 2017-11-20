@@ -202,8 +202,8 @@ function degToRad(deg) {
     return deg * (Math.PI / 180);
 }
 
-$('overlay').hover(function(){
-    $(this).sibling('img').addClass('image-filter')
+$('.overlay').hover(function(){
+    $(this).addClass('hoverOverlay');
 }, function() {
-    $(this).sibling('img').removeClass('image-filter')
+    $(this).removeClass('hoverOverlay');
 });
