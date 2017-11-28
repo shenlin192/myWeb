@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Get other environment variable.
+ * Get development environment variable.
  */
 
 if (process.env.NODE_ENV !== 'production') {

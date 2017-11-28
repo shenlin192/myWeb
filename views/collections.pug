@@ -9,33 +9,59 @@ block content
     div.filter
     canvas#canvas
 
+    -
+        var collections = [
+            [{
+                img:"/images/collections/hylab.png",
+                link: "http://apps.hyblab.fr/ddj2016/ouest_france/",
+                title: "Ouest France",
+                description: "Web data-visualisation",
+                date: "2016.01 - 2016.02",
+                description2: "(PC only)"
+            },
+            {
+                img:"/images/collections/dashboard.png",
+                link: "/react",
+                title: "Hoolders",
+                description: "React dashboard web application",
+                date: "2017.06 - 2017.09",
+                description2: "(Login required)"
+            }],
+            [
+                {
+                img:"/images/collections/hoolders.png",
+                link: "https://hoolders.com/",
+                title: "Hoolders",
+                description: "Hoolders Home page",
+                date: "2017.02 - 2017.03",
+                description2: ""
+                }
+            ]
+        ];
+
+    mixin collection-generator(collection,index)
+        div.col-sm-12.col-md-6
+            div.collection-group
+                img(src=collection.img)
+                a(href=collection.link target="_blank")
+                    div.overlay
+                        h2=(collection.title)
+                        p.description=(collection.description)
+                        p.date=(collection.date)
+                        if collection.description2
+                            p.description=(collection.description2)
+
+    mixin row-generator(row)
+        div.row
+            for collection, index in row
+                +collection-generator(collection,index)
+
+
     div.container-fluid.collection
         div.row
-            div.col-12.col-sm-10.offset-sm-1
-                div.row
-                    div.col-sm-12.col-md-6.col-lg-5.col-xl-4.offset-xl-2
-                        div.collection-group
-                            img(src="/images/collections/hylab.png")
-                            a(href="http://apps.hyblab.fr/ddj2016/ouest_france/")
-                                div.overlay
-                                    h2 Ouest France
-                                    p.description Web data-visualisation Project
-                                    p.date 2016.01 - 2016.02
-                            //svg(width="100%", height="100%", style="position: absolute; top: 0; left:0")
-                            //    defs
-                            //        filter#blur
-                            //            fegaussianblur(in="SourceGraphic", stddeviation="3")
-                            //    image(filter="url(#blur)", xlink:href="/images/collections/hylab.png", x="0", y="0", height="100%", width="100%")
-
-                    div.col-sm-12.col-md-6.col-lg-5.offset-lg-2.col-xl-4.offset-xl-0
-                        div.collection-group
-                            img(src="/images/collections/dashboard.png")
-                            a(href="/react")
-                                div.overlay
-                                    h2 Hoolders
-                                    p.description React dashboard Project
-                                    p.date 2017.06 - 2017.09
-
+            div.col-10.offset-1
+                for row in collections
+                    +row-generator(row)
 
 block scripts
     //script(src="https://rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js")

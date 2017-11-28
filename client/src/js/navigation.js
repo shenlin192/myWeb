@@ -6,3 +6,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import $ from 'jquery';
 import 'bootstrap';
+import { getCookie } from './common/cookie';
+
+export function dynamicNav(){
+    const login =  $('#navbarSupportedContent').find('.nav-item:eq(4), .nav-item:eq(5)');
+    const logout =  $('#navbarSupportedContent').find('.nav-item:eq(6)');
+    if(getCookie('connect.sid')){
+        login.hide(100);
+        logout.show(100);
+    }else{
+        logout.hide(100);
+        login.show(100);
+    }
+}
+
+dynamicNav();

@@ -86,11 +86,10 @@
     border-right: solid 4px #DBF4FF;
     border-radius: 0;
 }
-
+#skills .fp-tableCell {
+    vertical-align: top;
+}
 @media all and (max-width: 992px) {
-    #skills .fp-tableCell {
-        vertical-align: top;
-    }
 
     #skills .my-btn{
         margin: 0;

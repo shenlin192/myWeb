@@ -13,15 +13,22 @@ nav{
     .navbar-nav{
         width: 100%;
         @media (min-width: 992px) {
+            margin-left: 10vw;
+        }
+        @media (min-width: 1880px) {
             margin-left: 20vw;
         }
     }
     .nav-item{
         flex: 1;
+        text-align: center;
         a{
-            color:#1097d5;
+            color:#1097d5!important;
             text-transform: uppercase;
             display: inline-block;
         }
+    }
+    .navbar-toggler{
+        float: right;
     }
 }

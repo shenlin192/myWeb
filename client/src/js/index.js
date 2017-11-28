@@ -114,19 +114,11 @@ if ((document.documentElement.clientWidth / screenWidth) < 0.80) {
 /* Fade out the welcome message. */
 
 $welcome
-    .velocity({ opacity: [ 0, 0.65 ] }, { display: "none", delay: 4000, duration: 500, complete:function(){
+    .velocity({ opacity: [ 0, 0.75 ], }, { display: "none", delay: 4500, duration: 1000, complete:function(){
         $welcome.html("<p>Welcome to shenlinweb</p>")
     }})
     .velocity({ opacity: 0.75, scale:1.5 }, { duration: 3000, display: "block" })
-    .velocity({ opacity: 0 , scale:1}, {duration: 500, delay: 8000, complete:function(){
-        $welcome.html("<p>This site is currently<br/> <strong>under construction</strong></p>")
-    }})
-    .velocity({ opacity: 0.75}, { duration: 1000})
-    .velocity({ opacity: 0}, {duration: 500,  delay: 2500, complete:function(){
-        $welcome.html("But I'm working hard<br/> to create a <br/> new and fresh design.")
-    }})
-    .velocity({ opacity: 0.75, scale:1.5}, {duration: 2000})
-    .velocity({ opacity: 0, scale:1}, {duration: 1000, delay:7000});
+    .velocity({ opacity: 0}, {duration: 1500, delay:5500});
 
 
 /* Animate the dots' container. */
@@ -162,17 +154,9 @@ $dots
             function() { return Math.random() },
             function() { return Math.random() + 0.1 }
         ]
-    }, { duration: 15500 })
-    .velocity("reverse", { easing: "easeOutQuad" })
+    }, { duration: 13500 })
     .velocity({ opacity: 0 }, { duration: 2000, complete: function() {
-        $welcome
-            .html("<img src='/images/logo.png'/>" +
-                "<p>Your website can be amazing</p>")
-            .css("top", "25%")
-            .velocity({ opacity: 0.75 }, { duration: 3500 })
-            .velocity({ opacity: 0}, { duration: 2000, delay:3000, complete:function(){
-                $('nav').velocity( {opacity:1}, { duration: 2000})
-            }});
+        $('.menu').css('display','block').velocity( {opacity:1}, { duration: 2000})
         }
     })
     .appendTo($container);

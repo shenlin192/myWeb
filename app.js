@@ -57,15 +57,42 @@ app.use(cookieParser());
 app.use(express.static('public'));
 app.use(express.static('client/dist'));
 
-app.use(session({
+
+
+let sess = {
     // secret: crypto.randomBytes(10).toString(),
-    secret: '123',
+    secret: process.env.SESSION_SECRECT,
     resave: true, // don't renew the session cookies
-    saveUninitialized: true, // don't send cookies unless logged in
+    saveUninitialized: false, // don't send cookies unless logged in
     // using store session on MongoDB using express-session + connect
-    store: new MongoStore({ mongooseConnection: db.connection })
-    // cookie: { secure: true }
-}));
+    store: new MongoStore({ mongooseConnection: db.connection }),
+    cookie: { httpOnly:false }
+};
+
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', true);// trust first proxy
+    sess.cookie.secure = true; // serve secure cookies
+}
+
+app.use(session(sess));
+
+//
+// app.use(session({
+//     // secret: crypto.randomBytes(10).toString(),
+//     secret: process.env.SESSION_SECRECT,
+//     resave: true, // don't renew the session cookies
+//     saveUninitialized: false, // don't send cookies unless logged in
+//     // using store session on MongoDB using express-session + connect
+//     store: new MongoStore({ mongooseConnection: db.connection }),
+//     cookie: (()=>{
+//         if(process.env.NODE_ENV ==='production'){
+//             return { secure: true, app.set('trust proxy', 1) httpOnly:false }
+//         }else{
+//             return { secure: false, httpOnly:false }
+//         }
+//     })()
+//     cookie: { secure: false }
+// }));
 
 
 app.use(passport.initialize());
@@ -74,8 +101,8 @@ app.use(passport.session());
 // force secure connect
 if (process.env.NODE_ENV == 'production') {
     function requireHTTPS(req, res, next) {
-        if (!req.secure) {
-            //FYI this should work for local development as well
+        let schema = req.headers["x-forwarded-proto"];
+        if (schema !== "https") {
             return res.redirect('https://' + req.get('host') + req.url);
         }
         next();
@@ -116,6 +143,13 @@ function ensureSecure(req, res, next){
     }
     res.redirect('https://' + req.hostname + req.url); // express 4.x
 }
+
+
+// module.exports ={
+//     sayHello: function (){
+//         return "hello"
+//     }
+// };
 
 
 module.exports = app;

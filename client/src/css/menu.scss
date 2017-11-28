@@ -79,16 +79,16 @@ a{
 %ball{
     background:$fg;
     border-radius:100%;
-    width:80px;
-    height:80px;
-    margin-left:-40px;
-    margin-top:-40px;
+    width:90px;
+    height:90px;
+    margin-left:-45px;
+    margin-top:-45px;
     position:absolute;
     top:50%;
     left:50%;
     color:white;
     text-align:center;
-    line-height:80px;
+    line-height:90px;
     transform:translate3d(0,0,0);
     transition:transform ease-out 200ms;
 }
@@ -136,13 +136,14 @@ $hamburger-spacing:8px;
 .menu{
     @extend %goo;
     opacity: 0;
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     width: 380px;
-    height: 250px;
+    height: 280px;
     margin-left: -190px;
-    margin-top: -125px;
+    margin-top: -140px;
 }
 
 
@@ -167,6 +168,7 @@ $hamburger-spacing:8px;
     &:hover{
         background:white;
         color:$fg;
+        text-decoration: none;
         //span{
         //    display: inline-block;
         //}

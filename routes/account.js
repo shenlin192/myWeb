@@ -30,10 +30,7 @@ passport.deserializeUser(function(id, done) {
 /**
  *  login requests
  */
-router.get('/login', csrfProtection, function(req, res, next) {
-    // console.log(req);
-    // console.log(req.csrfToken);
-    // console.log(req.csrfToken());
+router.get('/login',csrfProtection, function(req, res, next) {
     console.log(req.user);
     console.log(req.isAuthenticated())
     res.cookie('csrfToken', req.csrfToken());
@@ -114,6 +111,24 @@ router.post('/login', function(req, res, next) {
 
 
 
+/**
+ * Logout
+ */
+router.get('/logout', function(req, res, next){
+    req.logout();
+    req.session.destroy(()=>{
+        res.clearCookie('connect.sid');
+        res.redirect('/account/login');
+    });
+});
+
+
+
+router.get('/isAuthenticated', function(req, res, next){
+    res.json({
+        isAuthenticated: req.isAuthenticated()
+    })
+});
 
 
 /**
@@ -549,8 +564,9 @@ router.post('/reset/:token', csrfProtection,  function(req, res, next) {
 
 
 
+
 router.get('/test', function(req, res, next) {
-    console.log(req.isAuthenticated());
+    console.log(req.headers) ;
     res.end()
 });
 

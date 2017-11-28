@@ -15,6 +15,8 @@ import iziToast from 'izitoast';
 import "babel-polyfill";
 import './navigation';
 
+import {dynamicNav} from './navigation';
+
 //
 backgroundAnimation();
 
@@ -102,7 +104,7 @@ $('#login').on('click',function (e) {
     async function post(){
 
         processAnimation();
-``
+
         const res = await $.ajax({
             url: '/account/login',
             type: 'POST',
@@ -122,6 +124,7 @@ $('#login').on('click',function (e) {
             },1000);
 
         }else{
+            dynamicNav();
             successAnimation();
             setTimeout(function(){
                 const success =  $('.auth .success');

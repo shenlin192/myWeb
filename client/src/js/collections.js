@@ -112,9 +112,9 @@ var canvas  = document.getElementById('canvas'),
     dots = [],
     dotsMinDist = 2,
     params = {
-        maxDistFromCursor: 50,
-        dotsSpeed: 0,
-        backgroundSpeed: 0
+        maxDistFromCursor: 10,
+        dotsSpeed: 20,
+        backgroundSpeed: 20
     };
 
 // var gui;
@@ -124,8 +124,9 @@ var canvas  = document.getElementById('canvas'),
 // gui.add(params, 'backgroundSpeed').min(0).max(150).step(1).name('Sky speed');
 // gui.open();
 //
-// setCanvasSize();
-// init();
+
+setCanvasSize();
+init();
 
 function setCanvasSize() {
     WIDTH = document.documentElement.clientWidth,
@@ -202,8 +203,8 @@ function degToRad(deg) {
     return deg * (Math.PI / 180);
 }
 
-$('.overlay').hover(function(){
-    $(this).addClass('hoverOverlay');
-}, function() {
-    $(this).removeClass('hoverOverlay');
-});
+// $('.overlay').hover(function(){
+//     $(this).addClass('hoverOverlay');
+// }, function() {
+//     $(this).removeClass('hoverOverlay');
+// });

@@ -109,28 +109,33 @@ new Vue({
             { name: 'Antd',        level: 7, tag: ['frontend'] },
             { name: 'LESS',        level: 6, tag: ['frontend'] },
             { name: 'SASS',        level: 6, tag: ['frontend'] },
+            { name: 'velocity.js',        level: 7, tag: ['frontend'] },
 			{ name: 'VueJs',        level: 5, tag: ['frontend', 'framework'] },
-            { name: 'AngularJS2',     level: 4, tag: ['frontend', 'framework'] },
-            { name: 'Highcharts',    level: 4, tag: ['frontend', 'framework', 'dataviz'] },
-            { name: 'SVG',    level: 5, tag: ['frontend', 'framework', 'dataviz'] },
+            { name: 'AngularJS2',     level: 2, tag: ['frontend', 'framework'] },
+            { name: 'Highcharts.js',    level: 4, tag: ['frontend', 'framework', 'dataviz'] },
+            { name: 'SVG',    level: 5, tag: ['frontend', 'dataviz'] },
+            { name: 'webpack',    level: 6, tag: ['frontend', 'tool'] },
 
-            { name: 'Python',       level: 7, tag: ['backend', 'language'] },
+            { name: 'Python',       level: 6, tag: ['backend', 'language'] },
             { name: 'Django',       level: 6, tag: ['backend','framework'] },
+            { name: 'Node.js',       level: 7, tag: ['backend'] },
+            { name: 'Express.js',       level: 7, tag: ['backend', 'framework'] },
+            { name: 'passport.js', level: 6 , tag: [ 'backend'] },
+            { name: 'Express Validator',       level: 7, tag: ['backend'] },
             { name: 'Django RESTful API',       level: 5, tag: ['backend','framework'] },
-            { name: 'LemonWay',       level: 5, tag: ['backend'] },
 
-            { name: 'Node.js',       level: 4, tag: ['backend'] },
-            { name: 'Express.js',       level: 4, tag: ['backend', 'framework'] },
-         
+            { name: 'MySQL',         level: 6, tag: ['database'] },
+            { name: 'phpMyAdmin',       level: 6, tag: ['tool', 'database'] },
+            { name: 'mlab',       level: 6, tag: ['tool', 'database'] },
+            { name: 'MongoDB',       level: 7, tag: ['database'] },
+            { name: 'Mongoose.js', level: 6 , tag: [ 'backend','database'] },
 
-            { name: 'MySQL',         level: 6, tag: ['backend', 'database'] },
-            { name: 'phpMyAdmin',         level: 6, tag: ['tool', 'database'] },
-            { name: 'Navicat',         level: 5, tag: ['tool', 'database'] },
-
-            { name: 'npm',           level: 6, tag: ['frontend', 'backend', 'tool'] },
+            { name: 'MailJet',       level: 6, tag: ['backend','tool'] },
+            { name: 'npm',           level: 7, tag: ['tool'] },
             { name: 'Git',           level: 7, tag: ['tool'] },
-            { name: 'Google Cloud Platform', level: 5 , tag: [ 'backend','tool'] },
-            { name: 'Linux',          level: 6, tag: ['backend','tool'] },
+            { name: 'Google App Engine', level: 7 , tag: [ 'backend','tool'] },
+
+            { name: 'Linux',          level: 6, tag: ['backend'] },
         ],
 
         switchButtons: [
@@ -178,13 +183,13 @@ new Vue({
             else {
                 self.shouldOffset = false;
                 if (filtered.length < 5) {
-                    self.chart.setSize(500, window.innerHeight * 0.3, true);
+                    self.chart.setSize(540, window.innerHeight * 0.3, true);
                 }
                 else if (filtered.length < 8) {
-                    self.chart.setSize(500, window.innerHeight * 0.4, true);
+                    self.chart.setSize(540, window.innerHeight * 0.4, true);
                 }
                 else {
-                    self.chart.setSize(500, window.innerHeight * 0.6, true);
+                    self.chart.setSize(540, window.innerHeight * 0.6, true);
                 }
             }
         });
@@ -219,13 +224,13 @@ new Vue({
 
             if (window.innerWidth > 768) {
                 if (filtered.length < 5) {
-                    self.chart.setSize(500, window.innerHeight * 0.3, true);
+                    self.chart.setSize(540, window.innerHeight * 0.3, true);
                 }
                 else if (filtered.length < 8) {
-                    self.chart.setSize(500, window.innerHeight * 0.4, true);
+                    self.chart.setSize(540, window.innerHeight * 0.4, true);
                 }
                 else {
-                    self.chart.setSize(500, window.innerHeight * 0.6, true);
+                    self.chart.setSize(540, window.innerHeight * 0.6, true);
                 }
             }
             else {
@@ -247,8 +252,8 @@ new Vue({
             chart: {
                 type: 'bar',
                 backgroundColor: '#1097d5',
-                marginLeft: 80,
-                width: 500,
+                marginLeft: 90,
+                width: 540,
                 height: 400,
             },
             title: {
@@ -389,7 +394,7 @@ new Vue({
         eduArray: [
             {
                 school: 'Polytech Nantes',
-                degree: 'Information engineer',
+                degree: 'Information Engineer',
                 duration: '2015.09 - 2017.09'
             },
             {

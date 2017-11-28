@@ -11,8 +11,6 @@ export default function backgroundAnimation(){
             let gamma = event.gamma;
             let beta = event.beta;
 
-
-
             if(!gamma||!beta){
                 // PC
                 $('body').stop().animate({
