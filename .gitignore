@@ -10,5 +10,5 @@
 
 .*
 !.gitignore
-
+!.eslintrc
 app.yaml

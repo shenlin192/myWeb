@@ -3,55 +3,62 @@
  */
 import $ from 'jquery';
 
-export default function backgroundAnimation(){
-    if (window.DeviceOrientationEvent) {
-        let preGamma = 0 ;
-        let preBeta = 90;
-        window.addEventListener('deviceorientation', function (event) {
-            let gamma = event.gamma;
-            let beta = event.beta;
+export function thresholdCheck(gamma, preGamma, beta, preBeta) {
+  let flag = false;
 
-            if(!gamma||!beta){
-                // PC
-                $('body').stop().animate({
-                    'background-position-x': '50%',
-                    'background-position-y': '0%'
-                }, 3000, 'linear');
+  if (gamma > preGamma + 5 || gamma < preGamma - 5) {
+    preGamma = gamma;
+    flag = true;
+  }
 
-                return 0;
-            }
+  if (beta > preBeta + 2 || beta < preBeta - 2) {
+    preBeta = beta;
+    flag = true
+  }
+  return [ flag, preGamma, preBeta ]
+}
 
-            let flag = false;
+export function angleNormalise(gamma, beta) {
 
-            if(gamma > preGamma+5||gamma < preGamma-5){
-                preGamma = gamma;
-                flag = true;
-            }
+  let xPos = (Math.round(gamma) + 90) / 1.8;
+  let yPos = (Math.round(beta) + 180) / 3.6;
+  if (yPos > 100) {
+    yPos = 100
+  }
+  return [ xPos, yPos ]
+}
 
-            if(beta > preBeta+2||beta < preBeta-2 ){
-                preBeta = beta;
-                flag = true;
-            }
 
-            // create only when changes
-            if(flag){
-                let xPos = (Math.round(gamma)+90)/1.8;
-                let yPos = (Math.round(beta)+180)/3.6;
-                // console.info('math',xPos,yPos);
+export default function backgroundAnimation() {
+  if (window.DeviceOrientationEvent) {
+    let preGamma = 0;
+    let preBeta = 90;
+    let flag = false;
 
-                if(yPos>100){
-                    yPos = 100
-                }
+    window.addEventListener('deviceorientation', function (event) {
+      let gamma = event.gamma;
+      let beta = event.beta;
 
-                // console.log(xPos,yPos);
+      if (!gamma || !beta) {
+        // PC
+        $('body').stop().animate({
+          'background-position-x': '50%',
+          'background-position-y': '0%',
+        }, 3000, 'linear');
+        return 0;
+      }
 
-                $('body').stop().animate({
-                    'background-position-x': xPos+'%',
-                    'background-position-y': yPos+'%'
-                }, 3000, 'linear');
-            }
-        }, false);
-    } else {
-        console.log("no device support");
-    }
+      [ flag, preGamma, preBeta ] = thresholdCheck(gamma, preGamma, beta, preBeta);
+
+      if (flag) {
+        let [ xPos, yPos ] = angleNormalise(gamma, beta);
+        $('body').stop().animate({
+          'background-position-x': xPos + '%',
+          'background-position-y': yPos + '%',
+        }, 3000, 'linear');
+      }
+    }, false);
+  } else {
+    console.log("no device support");
+  }
 }

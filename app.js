@@ -21,7 +21,6 @@ const expressValidator = require('express-validator');
 // routers
 const index = require('./routes/index');
 const account = require('./routes/account');
-const users = require('./routes/users');
 const react = require('./routes/react');
 const api = require('./routes/api');
 
@@ -113,7 +112,6 @@ if (process.env.NODE_ENV == 'production') {
 // router
 app.use('/', index);
 app.use('/account', account);
-app.use('/users', users);
 app.use('/react', react);
 app.use('/api', api);
 

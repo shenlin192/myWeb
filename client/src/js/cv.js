@@ -14,7 +14,7 @@ new Vue ({
     data: {
         avatarSrc: '',
         name: 'SHEN Lin',
-        description: 'The most amazing thing of programming is the feeling to create and destruct',
+        description: 'Passionate about building large web applications, crafting amazing UI, discovering new technologies and sharing ideas with other developers as well as web designers.',
         email: 'shenlin192@gmail.com'
     },
 
