@@ -6,7 +6,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { getCookie } from './common/cookie';
+import getCookie from './common/cookie';
 import '../css/navigation.scss';
 
 export default function dynamicNav() {
@@ -20,5 +20,3 @@ export default function dynamicNav() {
     login.show(100);
   }
 }
-
-dynamicNav();

@@ -254,7 +254,6 @@ router.post('/resend', (req, res, next) => {
     },
   });
 
-
   resendEmail();
 
   async function resendEmail() {
@@ -278,6 +277,20 @@ router.post('/resend', (req, res, next) => {
       res.json({ type: 'error', message: 'email not exist' });
       return 0;
     }
+
+    const user = docs[0];
+    const origin = new Date((user.tokens.confirmEmail.date).getTime() + 60000);
+    const now = new Date();
+
+    if (origin > now) {
+      res.json({ type: 'error', message: 'Request too frequent' });
+      return 0;
+    }
+
+    user.tokens.confirmEmail.date = now + 3600000;
+    user.save();
+
+    const token = user.tokens.confirmEmail.value;
 
     // resend email
     const emailConfig = {
@@ -307,6 +320,7 @@ router.post('/resend', (req, res, next) => {
     await mailjet.post('send', { version: 'v3.1' }).request(emailConfig).catch((err) => {
       console.log(err.statusCode);
     });
+
     res.json({ type: 'success' });
   }
 });

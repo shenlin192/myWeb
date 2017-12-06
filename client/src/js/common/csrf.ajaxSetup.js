@@ -2,7 +2,7 @@
  * Created by shenlin on 04/11/2017.
  */
 import $ from 'jquery';
-import { getCookie } from './cookie';
+import getCookie from './cookie';
 
 $.ajaxSetup({
   beforeSend(xhr, settings) {

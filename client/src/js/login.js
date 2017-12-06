@@ -12,12 +12,14 @@ import 'babel-polyfill';
 
 import '../css/auth.scss';
 import './common/csrf.ajaxSetup';
-import { dynamicNav } from './navigation';
+import dynamicNav from './navigation';
 import backgroundAnimation from './common/background.animation';
 import { processAnimation, errorAnimation, successAnimation } from './common/post.animation';
 import validation from './common/validation';
+import has from './common/has';
 
 backgroundAnimation();
+dynamicNav();
 
 const configuration = {
   account: {
@@ -62,14 +64,10 @@ $('input[type="text"],input[type="password"],input[type="email"]').on('focus', (
   // If input not in errors, show animation
   const result = validation(configuration, formSelector, formGroupClassName, messageSelector);
 
-  if (result) {
-    if (!result.hasOwnProperty(event.target.name) && event.target.value) {
-      $(event.currentTarget).next().animate({ opacity: '1', right: '30' }, 200);
-    } else {
-      $(event.currentTarget).next().animate({ opacity: '0', right: '30' }, 200);
-    }
-  } else {
+  if (!has.call(result, event.target.name) && event.target.value) {
     $(event.currentTarget).next().animate({ opacity: '1', right: '30' }, 200);
+  } else {
+    $(event.currentTarget).next().animate({ opacity: '0', right: '30' }, 200);
   }
 });
 

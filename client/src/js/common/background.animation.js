@@ -4,28 +4,27 @@
 import $ from 'jquery';
 
 export function thresholdCheck(gamma, preGamma, beta, preBeta) {
-  let flag = false;
+  let [flag, tempGamma, tempBeta] = [false, preGamma, preBeta];
 
   if (gamma > preGamma + 5 || gamma < preGamma - 5) {
-    preGamma = gamma;
+    tempGamma = gamma;
     flag = true;
   }
 
   if (beta > preBeta + 2 || beta < preBeta - 2) {
-    preBeta = beta;
-    flag = true
+    tempBeta = beta;
+    flag = true;
   }
-  return [ flag, preGamma, preBeta ]
+  return [flag, tempGamma, tempBeta];
 }
 
 export function angleNormalise(gamma, beta) {
-
-  let xPos = (Math.round(gamma) + 90) / 1.8;
+  const xPos = (Math.round(gamma) + 90) / 1.8;
   let yPos = (Math.round(beta) + 180) / 3.6;
   if (yPos > 100) {
-    yPos = 100
+    yPos = 100;
   }
-  return [ xPos, yPos ]
+  return [xPos, yPos];
 }
 
 
@@ -35,9 +34,8 @@ export default function backgroundAnimation() {
     let preBeta = 90;
     let flag = false;
 
-    window.addEventListener('deviceorientation', function (event) {
-      let gamma = event.gamma;
-      let beta = event.beta;
+    window.addEventListener('deviceorientation', (event) => {
+      const [gamma, beta] = [event.gamma, event.beta];
 
       if (!gamma || !beta) {
         // PC
@@ -48,17 +46,18 @@ export default function backgroundAnimation() {
         return 0;
       }
 
-      [ flag, preGamma, preBeta ] = thresholdCheck(gamma, preGamma, beta, preBeta);
+      [flag, preGamma, preBeta] = thresholdCheck(gamma, preGamma, beta, preBeta);
 
       if (flag) {
-        let [ xPos, yPos ] = angleNormalise(gamma, beta);
+        const [xPos, yPos] = angleNormalise(gamma, beta);
         $('body').stop().animate({
-          'background-position-x': xPos + '%',
-          'background-position-y': yPos + '%',
-        }, 3000, 'linear');
+          'background-position-x': `${xPos}%`,
+          'background-position-y': `${yPos}%`,
+        }, 3000, 'linear');return 0;
       }
+      return 0;
     }, false);
   } else {
-    console.log("no device support");
+    console.log('no device support');
   }
 }

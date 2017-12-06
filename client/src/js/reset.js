@@ -1,18 +1,19 @@
 /**
  * Created by shenlin on 10/11/2017.
  */
-
-import '../css/auth.scss';
-
 import $ from 'jquery';
 import 'jquery-ui-bundle';
 import iziToast from 'izitoast';
 import 'babel-polyfill';
+
+import '../css/auth.scss';
 import './common/csrf.ajaxSetup';
 import backgroundAnimation from './common/background.animation';
 import validation from './common/validation';
-import './navigation';
+import dynamicNav from './navigation';
+import has from './common/has';
 
+dynamicNav();
 backgroundAnimation();
 
 
@@ -51,25 +52,21 @@ const messageSelector = '.messages';
 // input animations
 $('input[type="text"],input[type="password"],input[type="email"]').on('focus', (event) => {
   $(event.currentTarget).prev().addClass('icon-animation');
-}).on('blur', () => {
+}).on('blur', (event) => {
   $(event.currentTarget).prev().removeClass('icon-animation');
-}).on('keyup', () => {
+}).on('keyup', (event) => {
   // If input not in errors, show animation
   const result = validation(configuration, formSelector, formGroupClassName, messageSelector);
 
-  if (result) {
-    if (!result.hasOwnProperty(event.target.name) && event.target.value) {
-      $(event.currentTarget).next().animate({ opacity: '1', right: '30' }, 200);
-    } else {
-      $(event.currentTarget).next().animate({ opacity: '0', right: '30' }, 200);
-    }
-  } else {
+  if (!has.call(result, event.target.name) && event.target.value) {
     $(event.currentTarget).next().animate({ opacity: '1', right: '30' }, 200);
+  } else {
+    $(event.currentTarget).next().animate({ opacity: '0', right: '30' }, 200);
   }
 });
 
 
-$('input[type="submit"]').on('click', (e) => {
+$('input[type="submit"]').on('click', () => {
   const result = validation(configuration, formSelector, formGroupClassName, messageSelector);
 
   if (result) {
@@ -77,8 +74,6 @@ $('input[type="submit"]').on('click', (e) => {
   }
 
   const formData = $('form').serializeArray();
-
-  post();
 
   async function post() {
     const processing = $('.processing');
@@ -137,10 +132,11 @@ $('input[type="submit"]').on('click', (e) => {
             opacity: 0.25,
           }, 100, () => {
             span.css('opacity', 1);
-            span.text(sec--);
+            sec -= 1;
+            span.text(sec);
           });
 
-          if (sec == -1) {
+          if (sec === -1) {
             span.fadeOut('fast');
             clearInterval(timer);
             window.location.href = '/account/login';
@@ -149,5 +145,8 @@ $('input[type="submit"]').on('click', (e) => {
       }, 1400);
     }
   }
+
+  post();
+  return 0;
 });
 

@@ -13,6 +13,7 @@
     "node": "~7.7.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
     "bootstrap": "^4.0.0-beta.2",
@@ -41,10 +42,10 @@
     "pug": "^2.0.0-rc.4",
     "serve-favicon": "~2.4.5",
     "underscore": "^1.8.3",
+    "validate.js": "^0.12.0",
     "velocity-animate": "^1.5.0",
     "vue": "^2.5.2",
-    "yes-https": "0.0.4",
-    "babel-polyfill": "^6.26.0"
+    "yes-https": "0.0.4"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "1.4.17",
@@ -68,6 +69,7 @@
     "mocha": "^4.0.1",
     "node-sass": "^4.5.3",
     "pug-html-loader": "^1.1.5",
+    "pug-loader": "^2.3.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
