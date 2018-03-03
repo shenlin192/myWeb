@@ -113,7 +113,8 @@ new Vue({
       { name: 'AngularJS2', level: 2, tag: ['frontend', 'framework'] },
       { name: 'Highcharts.js', level: 4, tag: ['frontend', 'framework', 'dataviz'] },
       { name: 'SVG', level: 5, tag: ['frontend', 'dataviz'] },
-      { name: 'webpack', level: 6, tag: ['frontend', 'tool'] },
+      { name: 'webpack', level: 6, tag: ['tool'] },
+      { name: 'ESLint', level: 7, tag: ['tool'] },
 
       { name: 'Python', level: 6, tag: ['backend', 'language'] },
       { name: 'Django', level: 6, tag: ['backend', 'framework'] },

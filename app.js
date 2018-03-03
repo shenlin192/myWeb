@@ -32,7 +32,7 @@ const api = require('./routes/api');
 // const config = require('./webpack.config.js');
 // const compiler = webpack(config);
 
-var app = express();
+const app = express();
 
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
@@ -57,56 +57,35 @@ app.use(express.static('public'));
 app.use(express.static('client/dist'));
 
 
-
-let sess = {
-    // secret: crypto.randomBytes(10).toString(),
-    secret: process.env.SESSION_SECRECT,
-    resave: true, // don't renew the session cookies
-    saveUninitialized: false, // don't send cookies unless logged in
-    // using store session on MongoDB using express-session + connect
-    store: new MongoStore({ mongooseConnection: db.connection }),
-    cookie: { httpOnly:false }
+const sess = {
+  // secret: crypto.randomBytes(10).toString(),
+  secret: process.env.SESSION_SECRECT,
+  resave: true, // don't renew the session cookies
+  saveUninitialized: false, // don't send cookies unless logged in
+  // using store session on MongoDB using express-session + connect
+  store: new MongoStore({ mongooseConnection: db.connection }),
+  cookie: { httpOnly: false },
 };
 
 if (process.env.NODE_ENV === 'production') {
-    app.set('trust proxy', true);// trust first proxy
-    sess.cookie.secure = true; // serve secure cookies
+  app.set('trust proxy', true);// trust first proxy
+  sess.cookie.secure = true; // serve secure cookies
 }
 
 app.use(session(sess));
-
-//
-// app.use(session({
-//     // secret: crypto.randomBytes(10).toString(),
-//     secret: process.env.SESSION_SECRECT,
-//     resave: true, // don't renew the session cookies
-//     saveUninitialized: false, // don't send cookies unless logged in
-//     // using store session on MongoDB using express-session + connect
-//     store: new MongoStore({ mongooseConnection: db.connection }),
-//     cookie: (()=>{
-//         if(process.env.NODE_ENV ==='production'){
-//             return { secure: true, app.set('trust proxy', 1) httpOnly:false }
-//         }else{
-//             return { secure: false, httpOnly:false }
-//         }
-//     })()
-//     cookie: { secure: false }
-// }));
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 // force secure connect
 if (process.env.NODE_ENV == 'production') {
-    function requireHTTPS(req, res, next) {
-        let schema = req.headers["x-forwarded-proto"];
-        if (schema !== "https") {
-            return res.redirect('https://' + req.get('host') + req.url);
-        }
-        next();
+  function requireHTTPS(req, res, next) {
+    const schema = req.headers['x-forwarded-proto'];
+    if (schema !== 'https') {
+      return res.redirect(`https://${req.get('host')}${req.url}`);
     }
-    app.use(requireHTTPS);
+    next();
+  }
+  app.use(requireHTTPS);
 }
 
 // router
@@ -116,15 +95,15 @@ app.use('/react', react);
 app.use('/api', api);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   // console.error("server error", err);
   res.locals.message = err.message;
@@ -133,21 +112,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-function ensureSecure(req, res, next){
-    if(req.secure){
-        return next();
-    }
-    res.redirect('https://' + req.hostname + req.url); // express 4.x
-}
-
-
-// module.exports ={
-//     sayHello: function (){
-//         return "hello"
-//     }
-// };
 
 
 module.exports = app;

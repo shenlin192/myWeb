@@ -5,12 +5,15 @@ const express = require('express');
 
 const router = express.Router();
 // const path = require('path');
-const helper = require('./global');
+// const helper = require('./global');
 
 /* GET home page. */
-router.get('/', helper.authenticationMiddleware(), (req, res, next) => {
+// router.get('/', helper.authenticationMiddleware(), (req, res, next) => {
+//   res.sendFile('public/dashboard/build/index.html', { root: './' });
+// });
+
+router.get('/', (req, res, next) => {
   res.sendFile('public/dashboard/build/index.html', { root: './' });
 });
-
 
 module.exports = router;
