@@ -1,0 +1,158 @@
+.infoSocial {
+
+  .icon {
+    width: 30px;
+    border-radius: 3px;
+    float: left;
+    @media(min-width: 768px) {
+      width: 25px;
+    }
+  }
+
+  .inputCompte {
+    margin-top: -8px;
+    margin-bottom: -8px;
+    float: right;
+    height: 40px;
+    padding-left: 10px;
+    color: #281E1D;
+    font-size: 14px;
+    font-weight: 500;
+    @media(min-width: 768px) {
+      border: 2px solid rgba(59, 87, 99, 0.2);
+    }
+  }
+
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: rgba(59, 87, 99, 0.35);
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: rgba(59, 87, 99, 0.35);
+    opacity: 1;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: rgba(59, 87, 99, 0.35);
+    opacity: 1;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: rgba(59, 87, 99, 0.35);
+  }
+  :-ms-input-placeholder { /* Microsoft Edge */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    color: rgba(59, 87, 99, 0.35);
+  }
+
+  .anticon-close-circle {
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+    font-size: 12px;
+  }
+  .anticon-close-circle:hover {
+    color: #999;
+  }
+  .anticon-close-circle:active {
+    color: #666;
+  }
+
+  .row {
+    width: 100%;
+    padding: 28px 10px 20px 20px;
+    button {
+      width: 80px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .col-xs-10 {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    img {
+      margin-left: 5px;
+    }
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  #outputLk a,
+  #outputFb a,
+  #outputTw a {
+    color: rgba(59, 87, 99, 0.35);
+    transform: scale(1.5);
+  }
+  #outputLk a:hover,
+  #outputFb a:hover,
+  #outputTw a:hover {
+    color: #337ab7;
+  }
+
+  #lk:hover,
+  #fb:hover,
+  #tw:hover {
+    background-color: rgba(183, 217, 238, 0.25);
+  }
+
+  #inputLk button,
+  #inputFb button,
+  #inputTw button {
+    color: #F39400;
+  }
+  #inputLk button:hover,
+  #inputFb button:hover,
+  #inputTw button:hover {
+    color: #F0AD4E;
+    background-color: transparent;
+  }
+
+  hr {
+    margin: 0 25px 0 25px;
+    // width: 96%;
+    border-top: 1.4px solid #eee;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+  .infoSocial {
+    .row {
+      padding: 28px 0 15px 20px;
+      .col-xs-1,
+      .col-xs-2,
+      .col-xs-10,
+      .col-xs-11 {
+        padding-left: 0;
+        padding-right: 0;
+        span {
+          display: none;
+        }
+        input {
+          width: 65%;
+        }
+        button {
+          width: 60px;
+          padding-left: 0;
+          padding-right: 0;
+          text-align: right;
+        }
+        img {
+          margin-top: -6px;
+          margin-left: 5px;
+        }
+      }
+    }
+    hr {
+      margin: 0 10px 0 10px;
+      // width: 96%;
+      border-top: 1.4px solid #eee;
+    }
+  }
+}

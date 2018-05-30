@@ -1,0 +1,24 @@
+@import './idCardModal.scss';
+
+$import_doc_orange: #fbc882;
+
+.national-card-modal {
+  @extend .id-card-modal;
+  .upload-card {
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 0;
+    .ant-upload.ant-upload-drag {
+      border: 4px dashed $import_doc_orange;
+      &：hover {
+        border-color: $import_doc_orange;
+      }
+    }
+    .anticon-plus:before {
+      color: $import_doc_orange;
+      content: "\E627";
+      font-size: 50px;
+      margin-bottom: 1vw;
+    }
+  }
+}

@@ -1,0 +1,247 @@
+.experienceThree button {
+  font-weight: 500;
+  color: #405A65;
+  border: 2px solid #B7D9EE;
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
+.experienceThree button:hover {
+  background: #337ab7;
+  color: white;
+  border: 2px solid #337ab7; }
+
+.experienceThree .ant-radio-group {
+  width: 90%;
+  margin-top: 21px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex; }
+  .experienceThree .ant-radio-group .ant-radio-button-wrapper {
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 57px;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #405A65;
+    border: 2px solid #b7d9ee;
+    line-height: 22px; }
+    .experienceThree .ant-radio-group .ant-radio-button-wrapper span {
+      padding-top: 16px; }
+  .experienceThree .ant-radio-group .ant-radio-button-wrapper:not(:first-child) {
+    border-left: none; }
+  .experienceThree .ant-radio-group .ant-radio-button-wrapper:not(:first-child)::before {
+    display: none; }
+  .experienceThree .ant-radio-group .ant-radio-button-wrapper-checked {
+    border: 2px solid #2e78b9;
+    color: white;
+    background-color: #2e78b9; }
+  .experienceThree .ant-radio-group .ant-radio-button-wrapper:hover {
+    color: white;
+    background-color: #b7d9ee;
+    border: 2px solid #b7d9ee; }
+  .experienceThree .ant-radio-group .ant-radio-button-wrapper-checked:hover {
+    color: white;
+    background-color: #2e78b9;
+    border: 2px solid #2e78b9; }
+  .experienceThree .ant-radio-group .ant-radio-button-wrapper:hover.ant-radio-button-wrapper:not(:first-child) {
+    border-left: none; }
+
+.experienceThree .checkListOne {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%; }
+  .experienceThree .checkListOne .col-sm-6 {
+    padding-left: 0px; }
+  .experienceThree .checkListOne .btn-default {
+    width: 100%;
+    height: 57px;
+    border: 2px solid #b7d9ee;
+    border-radius: 5px;
+    text-align: left;
+    margin-top: 15px;
+    padding-top: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #405A65; }
+    .experienceThree .checkListOne .btn-default .blueImg {
+      margin-top: -4px;
+      margin-right: 14px; }
+    .experienceThree .checkListOne .btn-default .whiteImg {
+      margin-top: -4px;
+      display: none; }
+  .experienceThree .checkListOne .btn-default:focus,
+  .experienceThree .checkListOne .btn-default:active {
+    color: #405A65;
+    border: 2px solid #b7d9ee;
+    background: white;
+    outline: none;
+    box-shadow: none; }
+  .experienceThree .checkListOne .btn-default.active {
+    color: white;
+    outline: none;
+    background-color: #2e78b9;
+    border: 2px solid #2e78b9;
+    border-radius: 5px;
+    box-shadow: none; }
+    .experienceThree .checkListOne .btn-default.active .blueImg {
+      display: none; }
+    .experienceThree .checkListOne .btn-default.active .whiteImg {
+      display: initial;
+      margin-right: 14px; }
+  .experienceThree .checkListOne .btn-default:hover {
+    color: white;
+    outline: none;
+    background-color: #b7d9ee;
+    border: 2px solid #b7d9ee;
+    border-radius: 5px; }
+    .experienceThree .checkListOne .btn-default:hover .blueImg {
+      display: none; }
+    .experienceThree .checkListOne .btn-default:hover .whiteImg {
+      display: initial;
+      margin-right: 14px; }
+  .experienceThree .checkListOne .btn-default.active:hover {
+    color: white;
+    background-color: #2e78b9;
+    border: 2px solid #2e78b9; }
+    .experienceThree .checkListOne .btn-default.active:hover .blueImg {
+      display: none; }
+    .experienceThree .checkListOne .btn-default.active:hover .whiteImg {
+      display: initial;
+      margin-right: 14px; }
+  @media (min-width: 0px) and (max-width: 767px) {
+    .experienceThree .checkListOne {
+      width: 100%;
+      margin-left: 0px;
+      margin-right: 0px; }
+      .experienceThree .checkListOne .col-sm-6 {
+        padding-right: 0px; }
+        .experienceThree .checkListOne .col-sm-6 button {
+          height: 46px;
+          padding-top: 11px;
+          padding-bottom: 11px; }
+      .experienceThree .checkListOne .btn-default:hover {
+        color: #405A65;
+        outline: none;
+        background-color: transparent;
+        border: 2px solid #b7d9ee;
+        border-radius: 5px; }
+        .experienceThree .checkListOne .btn-default:hover .blueImg {
+          display: initial;
+          margin-right: 14px; }
+        .experienceThree .checkListOne .btn-default:hover .whiteImg {
+          display: none; } }
+  @media (min-width: 0px) and (max-width: 374px) {
+    .experienceThree .checkListOne .col-sm-6:nth-child(2) button span,
+    .experienceThree .checkListOne .col-sm-6:nth-child(3) button span {
+      display: block;
+      word-wrap: break-word;
+      white-space: normal;
+      text-align: center;
+      margin-top: -28px;
+      margin-left: 28px; } }
+  @media (min-width: 0px) and (max-width: 411px) {
+    .experienceThree .checkListOne .col-sm-6:first-child button span {
+      display: block;
+      word-wrap: break-word;
+      white-space: normal;
+      text-align: center;
+      margin-top: -22px;
+      margin-left: 28px; }
+    .experienceThree .checkListOne .col-sm-6:nth-child(4) button span,
+    .experienceThree .checkListOne .col-sm-6:nth-child(5) button span {
+      display: block;
+      word-wrap: break-word;
+      white-space: normal;
+      text-align: center;
+      margin-top: -28px;
+      margin-left: 28px; } }
+  @media (min-width: 768px) and (max-width: 1273px) {
+    .experienceThree .checkListOne .col-sm-6 button {
+      padding-left: 5px;
+      padding-right: 0; }
+    .experienceThree .checkListOne .col-sm-6 button span {
+      display: block;
+      word-wrap: break-word;
+      white-space: normal;
+      text-align: center;
+      margin-top: -28px;
+      margin-left: 28px; } }
+
+.experienceThree .ant-slider-with-marks {
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  height: 22px;
+  border-radius: 9px; }
+  .experienceThree .ant-slider-with-marks .ant-slider-track {
+    background: linear-gradient(to right, #2e78b9, #70bbf2);
+    height: 14px; }
+  .experienceThree .ant-slider-with-marks .ant-slider-step {
+    height: 14px; }
+    .experienceThree .ant-slider-with-marks .ant-slider-step .ant-slider-dot {
+      border: transparent;
+      background-color: transparent; }
+    .experienceThree .ant-slider-with-marks .ant-slider-step .ant-slider-dot-active {
+      border: transparent;
+      background-color: transparent; }
+  .experienceThree .ant-slider-with-marks .ant-slider-handle {
+    width: 25px;
+    height: 25px;
+    border: #2e78b9;
+    background-color: #2e78b9; }
+
+@media (min-width: 0px) and (max-width: 767px) {
+  .experienceThree .ant-radio-group {
+    width: 100%;
+    margin-top: 21px;
+    display: flex; }
+    .experienceThree .ant-radio-group .ant-radio-button-wrapper {
+      height: 46px; }
+      .experienceThree .ant-radio-group .ant-radio-button-wrapper span {
+        padding-top: 10px; }
+    .experienceThree .ant-radio-group .ant-radio-button-wrapper-checked {
+      color: white;
+      background-color: #2e78b9; }
+  .experienceThree .ant-checkbox-wrapper {
+    display: block;
+    margin-bottom: 20px; }
+    .experienceThree .ant-checkbox-wrapper .ant-checkbox-input {
+      width: 25px;
+      height: 25px; }
+    .experienceThree .ant-checkbox-wrapper .ant-checkbox-inner {
+      width: 25px;
+      height: 25px; }
+    .experienceThree .ant-checkbox-wrapper .ant-checkbox-inner:after {
+      width: 10px;
+      height: 16px;
+      top: 1px;
+      left: 7px; }
+    .experienceThree .ant-checkbox-wrapper .ant-checkbox + span {
+      height: 32px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #405A65; }
+  .experienceThree .ant-slider-with-marks {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    height: 22px;
+    border-radius: 9px; } }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .experienceThree .firstQuestion,
+  .experienceThree .checkListOne {
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px; }
+    .experienceThree .firstQuestion .row,
+    .experienceThree .checkListOne .row {
+      width: 100%;
+      margin-left: 0px;
+      margin-right: 0px; }
+  .experienceThree .firstQuestion {
+    width: 97%;
+    margin-right: 10px; } }

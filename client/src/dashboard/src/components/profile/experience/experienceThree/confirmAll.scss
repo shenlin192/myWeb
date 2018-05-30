@@ -1,0 +1,85 @@
+.confirmation {
+  .ant-modal {
+    width: 667px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    .ant-modal-content {
+      border-radius: 0px;
+      .ant-modal-header {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        .ant-modal-title {
+          text-align: center;
+          font-size: 20px;
+          font-weight: 700;
+        }
+      }
+      .ant-modal-body {
+        .ant-checkbox-group {
+          .ant-checkbox-wrapper {
+            margin-top: 20px;
+            .ant-checkbox + span {
+              font-size: 14px;
+              font-weight: 500;
+              color: #405A65;
+              display: block;
+              margin-left: 20px;
+              margin-top: -18px;
+            }
+          }
+        }
+      }
+      .ant-modal-footer {
+        border-top: none;
+        text-align: center;
+        padding-bottom: 20px;
+        button {
+          width: 93px;
+          height: 43px;
+          margin-left: 15px;
+          margin-right: 15px;
+          font-size: 20px;
+          font-weight: 300;
+        }
+        button:first-child {
+          padding-left: 10px;
+          background: #B7B7B7;
+          color: white;
+          border: none;
+        }
+        button:first-child:hover {
+          background: #7a7a7a;
+        }
+        button:last-child {
+          padding-left: 13px;
+          background: #F39400;
+          color: white;
+          border: none;
+        }
+        button:last-child:hover {
+          background: #F0AD4E;
+        }
+        button:last-child:disabled,
+        button:last-child[disabled] {
+          color: rgba(0, 0, 0, .25);
+          background: #f7f7f7;
+          border: 2px dashed #d9d9d9;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+  .confirmation {
+    .ant-modal {
+      width: 95% !important;
+      height: 50vh !important;
+      margin-top: 6vh !important;
+      .ant-modal-body {
+        height: 50vh !important;
+        overflow: scroll;
+      }
+    }
+  }
+}

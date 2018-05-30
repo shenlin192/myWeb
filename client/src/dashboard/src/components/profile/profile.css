@@ -1,0 +1,11 @@
+.profile {
+  padding-right: 1.5vw;
+  padding-left: 0.5vw; }
+  .profile .progress-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(59, 87, 99, 0.35);
+    margin-top: 10px;
+    margin-bottom: 0; }
+  .profile .ant-progress-bg {
+    background-color: #337ab7; }

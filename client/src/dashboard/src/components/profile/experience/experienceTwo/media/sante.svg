@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 505 505">
+    <defs>
+        <style>.cls-1{fill:none;stroke:#2e78b9;stroke-linecap:round;stroke-linejoin:round;stroke-width:10px;}</style>
+    </defs>
+    <title>Fichier 1</title>
+    <g id="Calque_2" data-name="Calque 2">
+        <g id="Calque_1-2" data-name="Calque 1">
+            <circle class="cls-1" cx="252.5" cy="252.5" r="247.5"/>
+            <path class="cls-1" d="M253.4,30.2c134.9,0,223.3,107.1,223.3,223.3"/>
+            <polyline class="cls-1" points="73 250 160.2 250 217.6 137.8 259.9 367.2 317.3 247.5 431.9 247.5"/>
+        </g>
+    </g>
+</svg>

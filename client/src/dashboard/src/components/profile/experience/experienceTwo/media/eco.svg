@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 505 505">
+    <defs>
+        <style>.cls-1{fill:none;stroke:#2e78b9;stroke-linecap:round;stroke-linejoin:round;stroke-width:10px;}</style>
+    </defs>
+    <title>Fichier 1</title>
+    <g id="Calque_2" data-name="Calque 2">
+        <g id="Calque_1-2" data-name="Calque 1">
+            <circle class="cls-1" cx="252.5" cy="252.5" r="247.5"/>
+            <path class="cls-1" d="M253.5,30.2c134.9,0,223.3,107.2,223.3,223.4"/>
+            <path class="cls-1" d="M174.7,349.8s.5-78.4,77.8-78.4,77.8,78.4,77.8,78.4"/>
+            <circle class="cls-1" cx="252.6" cy="204.4" r="49.2"/>
+            <path class="cls-1" d="M75.4,349.8s.5-66.3,65.8-66.3c24.7,0,37.2,10,37.2,10"/>
+            <circle class="cls-1" cx="141.2" cy="225.9" r="41.6"/>
+            <path class="cls-1" d="M429.7,349.8s-.5-66.3-65.8-66.3c-24.7,0-37.2,10-37.2,10"/>
+            <circle class="cls-1" cx="363.9" cy="225.9" r="41.6"/>
+        </g>
+    </g>
+</svg>

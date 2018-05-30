@@ -1,0 +1,82 @@
+@import "App.scss";
+
+.experience {
+
+  a:hover {
+    background-color: rgba(183, 217, 238, 0.25);
+  }
+  .progress-exp {
+    margin-bottom: 15px;
+    @media(min-width: 768px) {
+      margin-bottom: 25px;
+    }
+  }
+}
+
+#experience-container {
+
+  // normal status
+  .ant-steps-head-inner {
+    border-radius: 50%;
+    background: #eaeaea;
+    padding: 7px;
+    width: 34px;
+    height: 34px;
+    .ant-steps-icon {
+      font-size: 20px;
+      color: #97b8d3;
+    }
+  }
+
+  // in process
+  .ant-steps-status-process {
+    .ant-steps-head-inner {
+      transform: scale(1.2);
+      background: $hoolders_orange;
+      .ant-steps-icon {
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  // finish status
+  .ant-steps-status-finish {
+    &:nth-child(1) {
+      .ant-steps-head-inner {
+        background: #e75414;
+        .ant-steps-icon {
+          color: #FFFFFF;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      .ant-steps-head-inner {
+        background: #f07826;
+        .ant-steps-icon {
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+
+  // step bar
+  .ant-steps-item.ant-steps-status-finish {
+    &:nth-child(1) {
+      .ant-steps-tail > i:after {
+        background: linear-gradient(to right, #e75414, #f07826);
+        height: 8px;
+      }
+    }
+    &:nth-child(2) {
+      .ant-steps-tail > i:after {
+        background: linear-gradient(to right, #f07826, $hoolders_orange);
+        height: 8px;
+      }
+    }
+  }
+
+  .ant-steps-tail > i {
+    height: 8px;
+  }
+}

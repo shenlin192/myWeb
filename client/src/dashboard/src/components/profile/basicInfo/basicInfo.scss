@@ -1,0 +1,313 @@
+.basicEdit {
+  .infoBasic {
+    .changePhoto {
+      color: rgb(64, 90, 101);
+      font-size: 14px;
+      font-weight: 400;
+      border: 2px solid rgb(183, 217, 238);
+      width: 100%;
+      margin-top: 5%;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 5px;
+
+      @media (min-width: 0px) and (max-width: 767px) {
+        line-height: 26px;
+        max-width: 200px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 16px;
+      }
+    }
+
+    input, textarea {
+      &:focus {
+        background: rgba(#70BDFF, 0.6) !important;
+        transition: all 1s ease-out;
+        -webkit-transition: all 1s ease-out;
+        -moz-transition: all 1s ease-out;
+        -ms-transition: all 1s ease-out;
+        -o-transition: all 1s ease-out;
+      }
+    }
+
+    .gris-tag {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(40, 30, 29, 0.35);
+    }
+
+    @media (min-width: 0px) and (max-width: 400px) {
+      .gris-tag {
+        font-size: 12px;
+      }
+    }
+
+    textarea {
+      background: red;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      color: rgba(59, 87, 99, 0.35);
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      color: rgba(59, 87, 99, 0.35);
+      opacity: 1;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      color: rgba(59, 87, 99, 0.35);
+      opacity: 1;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      color: rgba(59, 87, 99, 0.35);
+    }
+    :-ms-input-placeholder { /* Microsoft Edge */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      color: rgba(59, 87, 99, 0.35);
+    }
+
+    .react-tel-input {
+      width: 100%;
+      margin-right: 0;
+    }
+
+    .react-tel-input input[type=tel] {
+      height: 40px;
+      background: #F2F4F5;
+      border: none;
+      box-shadow: none;
+      color: rgb(64, 90, 101);
+      font-weight: 500;
+    }
+    .react-tel-input .flag-dropdown {
+      height: 40px;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+    }
+    .react-tel-input .flag-dropdown:hover .react-tel-input .selected-flag,
+    .react-tel-input .flag-dropdown:focus .react-tel-input .selected-flag {
+      background: #eaeaea;
+    }
+    .react-tel-input .selected-flag {
+      height: 40px;
+    }
+
+    // input for entreprise
+    @media (min-width: 401px) and (max-width: 767px) {
+      .companyBig {
+        display: none;
+      }
+    }
+
+    @media (min-width: 0px) and (max-width: 400px) {
+      .companySmall {
+        display: none;
+      }
+      .changePhoto {
+        font-size: 12px;
+      }
+    }
+
+    // input for date de naissance
+    @media (min-width: 551px) and (max-width: 767px) {
+      .dateBig {
+        display: none;
+      }
+    }
+
+    @media (min-width: 0px) and (max-width: 550px) {
+      .dateSmall {
+        display: none;
+      }
+    }
+
+    // input for numéro de telephone
+    @media (min-width: 695px) and (max-width: 767px) {
+      .teleBig {
+        display: none;
+      }
+    }
+
+    @media (min-width: 0px) and (max-width: 694px) {
+      .teleSmall {
+        display: none;
+      }
+    }
+
+    .ant-row.ant-form-item {
+      margin-bottom: 15px;
+    }
+
+    .ant-select-selection.ant-select-selection--single {
+      color: rgb(64, 90, 101);
+      font-weight: 500;
+      border-radius: 0px;
+      border: none;
+      background: rgb(242, 244, 245);
+      box-shadow: none;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      font-size: 16px;
+      height: 40px;
+      margin-right: 15%;
+    }
+
+    .year {
+      .ant-select-selection.ant-select-selection--single {
+        margin-right: 0
+      }
+      .ant-select-arrow {
+        right: 24px !important;
+      }
+    }
+    .country {
+      .ant-select-selection.ant-select-selection--single {
+        margin-right: 0
+      }
+      .ant-select-arrow {
+        right: 24px !important;
+      }
+    }
+
+    .ant-select-focused {
+      .ant-select-selection.ant-select-selection--single {
+        background: rgba(#70BDFF, 0.6) !important;
+      }
+    }
+
+    // for birthday
+    .ant-select-arrow {
+      right: 6px !important;
+    }
+
+    .control-label {
+      color: #405a66;
+    }
+
+    .is-validating.has-feedback:after {
+      top: 30%;
+    }
+
+  }
+
+  .ok {
+    background: #F39400;
+  }
+  .ok:hover {
+    background: #F0AD4E;
+  }
+
+  .cancel {
+    background: rgba(151, 151, 151, 0.33);
+  }
+  .cancel:hover {
+    background: rgba(151, 151, 151, 0.53);
+  }
+
+  .ok, .cancel {
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+
+  }
+
+  @media (min-width: 768px) {
+    .ok, .cancel {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+}
+
+.infoShow {
+
+  h4 {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #3c5763;
+  }
+
+  p {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #3c5763;
+  }
+
+  .identityName {
+    font-size: 20px;
+    font-weight: 600;
+    word-wrap: break-word;
+  }
+
+  .identityCompany {
+    font-size: 17px;
+    margin-top: -1%;
+    margin-bottom: 3%;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+
+  @media (min-width: 0px) and (max-width: 767px) {
+    .avatar-container {
+      position: relative;
+      top: 10vw;
+      padding-right: 0;
+    }
+
+  }
+
+  @media (min-width: 768px) {
+    margin-top: 24px;
+  }
+
+  /* basicInfo show*/
+  @media (min-width: 501px) {
+    .showBig {
+      display: none;
+    }
+  }
+
+  @media (min-width: 0px) and (max-width: 500px) {
+    .showSmall {
+      display: none;
+    }
+  }
+
+  @media (min-width: 0px) and (max-width: 991px) {
+    .showInfo h4,
+    .showBig h4 {
+      color: rgba(59, 87, 99, 0.35);
+      margin-top: 19px;
+      margin-bottom: 6px;
+    }
+
+    .identityName {
+      font-size: 16px;
+    }
+
+    .identityCompany {
+      font-size: 16px;
+    }
+  }
+
+}
+
+@media (min-width: 1200px) {
+  & #col-city {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+

@@ -1,0 +1,71 @@
+#experience-container .save {
+  border: none;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #337ab7; }
+
+#experience-container .save:hover {
+  color: #23527c; }
+
+#experience-container .steps-title .title1,
+#experience-container .steps-title .title2,
+#experience-container .steps-title .title3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #F39400;
+  margin-top: 15px;
+  margin-bottom: 25px; }
+
+#experience-container .steps-title .title2 {
+  text-align: center; }
+
+#experience-container .steps-title .title3 {
+  text-align: right; }
+
+@media (min-width: 768px) {
+  #experience-container .steps-content .experienceOne,
+  #experience-container .steps-content .experienceTwo,
+  #experience-container .steps-content .experienceThree {
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden; } }
+
+#experience-container .steps-action {
+  border-top: 3px solid #ECECEC;
+  padding-top: 25px; }
+  #experience-container .steps-action button {
+    float: right;
+    width: 164px;
+    height: 40px;
+    background: #F39400;
+    border: none;
+    font-size: 18px; }
+  #experience-container .steps-action button:hover {
+    background: #FED8AA; }
+  #experience-container .steps-action .retour {
+    float: left;
+    color: #B7B7B7;
+    display: table;
+    vertical-align: middle;
+    background: transparent; }
+  #experience-container .steps-action .retour:hover {
+    color: #2e78b9;
+    background: transparent; }
+
+#experience-container .clearfix::after {
+  content: "";
+  clear: both;
+  display: table; }
+
+@media (min-width: 0px) and (max-width: 767px) {
+  #experience-container .steps-title .title1,
+  #experience-container .steps-title .title2,
+  #experience-container .steps-title .title3 {
+    font-size: 18px;
+    text-align: initial; }
+  #experience-container .steps-content {
+    height: auto;
+    overflow-y: initial; }
+  #experience-container .steps-action button {
+    width: 110px; } }

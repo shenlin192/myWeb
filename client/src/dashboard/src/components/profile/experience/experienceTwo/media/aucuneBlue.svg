@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+    <title>没有</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1version-copy-2" transform="translate(-5398.000000, -1794.000000)" fill-rule="nonzero" fill="white">
+            <g id="没有" transform="translate(5398.000000, 1794.000000)">
+                <path d="M12,0 C5.3843077,0 0,5.3843077 0,12 C0,18.6147692 5.3843077,24 12,24 C18.6156923,24 24,18.6147692 24,12 C24,5.3843077 18.6156923,0 12,0 Z M2.82,12 C2.82,6.93046153 6.93046153,2.82 12,2.82 C13.9356923,2.82 15.7356923,3.41907691 17.22,4.4556923 L4.4556923,17.2209231 C3.41907691,15.7356923 2.82,13.9356923 2.82,12 Z M12,21.18 C10.1104615,21.18 8.36953847,20.6104615 6.9,19.6347692 L19.6347692,6.9 C20.6113846,8.37046153 21.1809231,10.1113846 21.1809231,12 C21.18,17.0695385 17.0695385,21.18 12,21.18 Z"
+                      id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

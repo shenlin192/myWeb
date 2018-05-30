@@ -1,0 +1,318 @@
+.experienceThree {
+  button {
+    font-weight: 500;
+    color: #405A65;
+    border: 2px solid #B7D9EE;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  button:hover {
+    background: #337ab7;
+    color: white;
+    border: 2px solid #337ab7;
+  }
+  .ant-radio-group {
+    width: 90%;
+    margin-top: 21px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    .ant-radio-button-wrapper {
+      padding-left: 0px;
+      padding-right: 0px;
+      height: 57px;
+      flex: 1;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      color: #405A65;
+      border: 2px solid rgb(183, 217, 238);
+      line-height: 22px;
+      span {
+        padding-top: 16px;
+      }
+    }
+    .ant-radio-button-wrapper:not(:first-child) {
+      border-left: none;
+    }
+    .ant-radio-button-wrapper:not(:first-child)::before {
+      display: none;
+    }
+    .ant-radio-button-wrapper-checked {
+      border: 2px solid #2e78b9;
+      color: white;
+      background-color: #2e78b9;
+    }
+    .ant-radio-button-wrapper:hover {
+      color: white;
+      background-color: rgb(183, 217, 238);
+      border: 2px solid rgb(183, 217, 238);
+    }
+    .ant-radio-button-wrapper-checked:hover {
+      color: white;
+      background-color: #2e78b9;
+      border: 2px solid #2e78b9;
+    }
+    .ant-radio-button-wrapper:hover.ant-radio-button-wrapper:not(:first-child) {
+      border-left: none;
+    }
+  }
+
+  .checkListOne {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    .col-sm-6 {
+      padding-left: 0px;
+    }
+
+    .btn-default {
+      width: 100%;
+      height: 57px;
+      border: 2px solid rgb(183, 217, 238);
+      border-radius: 5px;
+      text-align: left;
+      margin-top: 15px;
+      padding-top: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #405A65;
+      .blueImg {
+        margin-top: -4px;
+        margin-right: 14px;
+      }
+      .whiteImg {
+        margin-top: -4px;
+        display: none;
+      }
+    }
+    .btn-default:focus,
+    .btn-default:active {
+      color: #405A65;
+      border: 2px solid rgb(183, 217, 238);
+      background: white;
+      outline: none;
+      box-shadow: none;
+    }
+    .btn-default.active {
+      color: white;
+      outline: none;
+      background-color: #2e78b9;
+      border: 2px solid #2e78b9;
+      border-radius: 5px;
+      box-shadow: none;
+      .blueImg {
+        display: none;
+      }
+      .whiteImg {
+        display: initial;
+        margin-right: 14px
+      }
+    }
+    .btn-default:hover {
+      color: white;
+      outline: none;
+      background-color: rgb(183, 217, 238);
+      border: 2px solid rgb(183, 217, 238);
+      border-radius: 5px;
+      .blueImg {
+        display: none;
+      }
+      .whiteImg {
+        display: initial;
+        margin-right: 14px;
+      }
+    }
+    // .btn-default:focus:hover,
+    .btn-default.active:hover {
+      color: white;
+      background-color: #2e78b9;
+      border: 2px solid #2e78b9;
+      .blueImg {
+        display: none;
+      }
+      .whiteImg {
+        display: initial;
+        margin-right: 14px;
+      }
+    }
+    @media (min-width: 0px) and (max-width: 767px) {
+      width: 100%;
+      margin-left: 0px;
+      margin-right: 0px;
+      .col-sm-6 {
+        padding-right: 0px;
+        button {
+          height: 46px;
+          padding-top: 11px;
+          padding-bottom: 11px;
+        }
+      }
+      .btn-default:hover {
+        color: #405A65;
+        outline: none;
+        background-color: transparent;
+        border: 2px solid rgb(183, 217, 238);
+        border-radius: 5px;
+        .blueImg {
+          display: initial;
+          margin-right: 14px;
+        }
+        .whiteImg {
+          display: none;
+        }
+      }
+    }
+    @media (min-width: 0px) and (max-width: 374px) {
+      .col-sm-6:nth-child(2),
+      .col-sm-6:nth-child(3) {
+        button span {
+          display: block;
+          word-wrap: break-word;
+          white-space: normal;
+          text-align: center;
+          margin-top: -28px;
+          margin-left: 28px;
+        }
+      }
+    }
+    @media (min-width: 0px) and (max-width: 411px) {
+      .col-sm-6:first-child {
+        button span {
+          display: block;
+          word-wrap: break-word;
+          white-space: normal;
+          text-align: center;
+          margin-top: -22px;
+          margin-left: 28px;
+        }
+      }
+      .col-sm-6:nth-child(4),
+      .col-sm-6:nth-child(5), {
+        button span {
+          display: block;
+          word-wrap: break-word;
+          white-space: normal;
+          text-align: center;
+          margin-top: -28px;
+          margin-left: 28px;
+        }
+      }
+    }
+    @media (min-width: 768px) and (max-width: 1273px) {
+      .col-sm-6 {
+        button {
+          padding-left: 5px;
+          padding-right: 0;
+        }
+        button span {
+          display: block;
+          word-wrap: break-word;
+          white-space: normal;
+          text-align: center;
+          margin-top: -28px;
+          margin-left: 28px;
+        }
+      }
+    }
+  }
+
+  .ant-slider-with-marks {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    height: 22px;
+    border-radius: 9px;
+    .ant-slider-track {
+      background: linear-gradient(to right, #2e78b9, #70bbf2);
+      height: 14px;
+    }
+    .ant-slider-step {
+      height: 14px;
+      .ant-slider-dot {
+        border: transparent;
+        background-color: transparent;
+      }
+      .ant-slider-dot-active {
+        border: transparent;
+        background-color: transparent;
+      }
+    }
+    .ant-slider-handle {
+      width: 25px;
+      height: 25px;
+      border: #2e78b9;
+      background-color: #2e78b9;
+    }
+  }
+  @media (min-width: 0px) and (max-width: 767px) {
+    .ant-radio-group {
+      width: 100%;
+      margin-top: 21px;
+      display: flex;
+      .ant-radio-button-wrapper {
+        height: 46px;
+        span {
+          padding-top: 10px;
+        }
+      }
+      .ant-radio-button-wrapper-checked {
+        color: white;
+        background-color: #2e78b9;
+      }
+    }
+
+    .ant-checkbox-wrapper {
+      display: block;
+      margin-bottom: 20px;
+      .ant-checkbox-input {
+        width: 25px;
+        height: 25px;
+      }
+      .ant-checkbox-inner {
+        width: 25px;
+        height: 25px;
+      }
+      .ant-checkbox-inner:after {
+        width: 10px;
+        height: 16px;
+        top: 1px;
+        left: 7px;
+      }
+      .ant-checkbox + span {
+        height: 32px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #405A65;
+      }
+    }
+
+    .ant-slider-with-marks {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      height: 22px;
+      border-radius: 9px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .firstQuestion,
+    .checkListOne {
+      width: 100%;
+      margin-left: 0px;
+      margin-right: 0px;
+      .row {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+    }
+    .firstQuestion {
+      width: 97%;
+      margin-right: 10px;
+    }
+  }
+}

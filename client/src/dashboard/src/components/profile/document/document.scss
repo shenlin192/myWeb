@@ -1,0 +1,67 @@
+/**
+ * Created by shenlin on 7/11/17.
+ */
+@import "App.scss";
+
+.document {
+  background: white;
+  padding: 35px 10px 47px 10px;
+  box-shadow: 3px 3px 5px 0px rgba(161, 151, 151, 0.2);
+  margin-top: 25px;
+  @media (min-width: 768px) {
+    padding: 35px 25px 47px 25px;
+  }
+
+  .valid-img {
+    position: absolute;
+    width: 40%;
+    left: 0;
+    max-width: 200px;
+  }
+
+  .progress-doc {
+    margin-bottom: 15px;
+    @media (min-width: 767px) {
+      margin-bottom: 45px;
+    }
+  }
+
+  .ant-upload.ant-upload-drag {
+    border: none;
+  }
+
+  .ant-upload.ant-upload-drag.ant-upload-disabled {
+    border: none;
+  }
+
+  .document-card {
+    height: 222px;
+    border: rgba(92, 150, 201, 0.32) 2px solid;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+
+    h4 {
+      font-size: 14px;
+      color: #395561;
+      font-weight: 400;
+    }
+
+    p {
+      font-size: 12px;
+      font-weight: 400;
+      color: #5c96c9;
+      margin-top: 9px;
+    }
+
+    &:nth-child(2) {
+      @media (min-width: 0px) and (max-width: 767px) {
+        margin-top: 24px;
+      }
+    }
+
+  }
+}

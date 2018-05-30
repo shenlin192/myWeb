@@ -10,12 +10,12 @@ const yes = require('yes-https');
 //
 const db = require('./models/db');
 
-//authentication
+// authentication
 const session = require('express-session');
 const passport = require('passport');
 const MongoStore = require('connect-mongo')(session);
 // const LocalStrategy = require('passport-local').Strategy;
-const crypto = require("crypto");
+const crypto = require('crypto');
 const expressValidator = require('express-validator');
 
 // routers

@@ -1,0 +1,56 @@
+@import 'App.scss';
+
+.portefeuille {
+  .search-box {
+    label {
+      display: block;
+    }
+  }
+  .invest-slider {
+
+    .slider-container {
+      text-align: center;
+      box-shadow: rgba(161, 151, 151, 0.2) 3px 3px 5px 0px;
+      .background {
+        height: 250px;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .content {
+        height: 250px;
+        .info {
+          text-align: left;
+          background: #FFFFFF;
+          height: 205px;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          padding-left: 5vw;
+          h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: $hoolders_orange;
+          }
+          p {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba($text_blue, 0.6);
+          }
+        }
+        .show-docs {
+          height: 45px;
+          background: #f8f6f7;
+        }
+      }
+
+    }
+    .ant-carousel .slick-dots {
+      bottom: -12px;
+      button:before {
+        font-size: 12px;
+      }
+    }
+  }
+}
+

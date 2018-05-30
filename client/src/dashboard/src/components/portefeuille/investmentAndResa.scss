@@ -1,0 +1,68 @@
+.portefeuille {
+  .search-box {
+    margin-top: 50px;
+    margin-bottom: 60px;
+    label {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(40, 30, 29, 0.5);
+    }
+    .ant-select {
+      width: 100%;
+      box-shadow: 3px 3px 5px 0px rgba(161, 151, 151, 0.2);
+      .ant-select-selection {
+        height: 35px;
+        width: 100%;
+        border-radius: 0;
+        .ant-select-selection__rendered {
+          padding: 5px 0;
+          .ant-select-selection-selected-value {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    button {
+      width: 100%;
+      height: 35px;
+      border: none;
+      box-shadow: 3px 3px 5px 0px rgba(161, 151, 151, 0.2);
+      color: white;
+      font-size: 16px;
+      font-weight: 300;
+      background: #F39400;
+    }
+    button:hover {
+      background: #F0AD4E;
+    }
+    @media (min-width: 0px) and (max-width: 991px) {
+      label {
+        font-size: 14px;
+        font-weight: 500;
+      }
+      button {
+        font-size: 14px;
+      }
+    }
+  }
+  @media (min-width: 0px) and (max-width: 767px) {
+    .search-box {
+      margin-top: 40px;
+      margin-bottom: 0;
+    }
+  }
+  @media (min-width: 0px) and (max-width: 381px) {
+    .bigDiv {
+      margin-top: 40px !important;
+    }
+    .ant-switch {
+      margin-top: 4px !important;
+      float: right;
+      display: block;
+    }
+  }
+}
+
+.ant-select-dropdown {
+  border-radius: 0px !important;
+}
