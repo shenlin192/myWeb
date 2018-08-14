@@ -12,3 +12,4 @@
 !.gitignore
 !.eslintrc
 app.yaml
+package-lock.json
